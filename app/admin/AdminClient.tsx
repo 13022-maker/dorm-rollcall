@@ -11,6 +11,7 @@ import {
 
 type Row = {
   id: number;
+  region: string | null;
   building: string;
   className: string;
   studentNo: string | null;
@@ -36,6 +37,7 @@ export default function AdminClient({
   rows: Row[];
 }) {
   const router = useRouter();
+  const [region, setRegion] = useState('');
   const [building, setBuilding] = useState('');
   const [cls, setCls] = useState('');
   const [gender, setGender] = useState('');
@@ -52,8 +54,21 @@ export default function AdminClient({
     return () => clearInterval(t);
   }, [router]);
 
-  const buildings = useMemo(() => Array.from(new Set(rows.map((r) => r.building))).sort(), [rows]);
+  const regions = useMemo(
+    () => Array.from(new Set(rows.map((r) => r.region).filter((v): v is string => !!v))).sort(),
+    [rows]
+  );
+  // 選了地區時，樓別選單只列出該地區底下的校舍
+  const buildings = useMemo(() => {
+    const inRegion = region ? rows.filter((r) => r.region === region) : rows;
+    return Array.from(new Set(inRegion.map((r) => r.building))).sort();
+  }, [rows, region]);
   const classes = useMemo(() => Array.from(new Set(rows.map((r) => r.className))), [rows]);
+
+  function chooseRegion(v: string) {
+    setRegion(v);
+    setBuilding(''); // 換地區後樓別選項會變，先清掉避免選到不存在的組合
+  }
 
   const counts = useMemo(() => {
     const c: Record<RowStatus, number> = { on_time: 0, late: 0, overdue: 0, unreported: 0 };
@@ -67,6 +82,7 @@ export default function AdminClient({
   const filtered = useMemo(() => {
     const kw = q.trim();
     return rows
+      .filter((r) => (region ? r.region === region : true))
       .filter((r) => (building ? r.building === building : true))
       .filter((r) => (cls ? r.className === cls : true))
       .filter((r) => (gender ? r.gender === gender : true))
@@ -78,7 +94,7 @@ export default function AdminClient({
           (a.room ?? '').localeCompare(b.room ?? '') ||
           a.name.localeCompare(b.name)
       );
-  }, [rows, building, cls, gender, status, q]);
+  }, [rows, region, building, cls, gender, status, q]);
 
   return (
     <main className="wrap wide">
@@ -108,6 +124,16 @@ export default function AdminClient({
       </section>
 
       <section className="filters">
+        {regions.length > 0 && (
+          <select value={region} onChange={(e) => chooseRegion(e.target.value)}>
+            <option value="">全部地區</option>
+            {regions.map((r) => (
+              <option key={r} value={r}>
+                {r}
+              </option>
+            ))}
+          </select>
+        )}
         <select value={building} onChange={(e) => setBuilding(e.target.value)}>
           <option value="">全部樓別</option>
           {buildings.map((b) => (
@@ -134,8 +160,8 @@ export default function AdminClient({
           value={q}
           onChange={(e) => setQ(e.target.value)}
         />
-        {(building || cls || gender || status || q) && (
-          <button className="btn ghost sm" onClick={() => { setBuilding(''); setCls(''); setGender(''); setStatus(''); setQ(''); }}>
+        {(region || building || cls || gender || status || q) && (
+          <button className="btn ghost sm" onClick={() => { setRegion(''); setBuilding(''); setCls(''); setGender(''); setStatus(''); setQ(''); }}>
             清除
           </button>
         )}

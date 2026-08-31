@@ -10,12 +10,13 @@ import type { SeedStudent } from '../db/students.seed';
 //
 // 用法：npm run db:import -- 檔案路徑.csv
 // CSV 第一列要是欄位名稱，順序不拘：
-//   building,className,studentNo,name,gender,room,floor,company,note
+//   region,building,className,studentNo,name,gender,room,floor,company,note
 // 其中 building / className / name 必填，其他欄位可留空。
+// region 是地區篩選用的上層分類（例：明新、萬能、啟英），一般宿舍生留空即可。
 // company 是建教合作班的工讀公司，一般宿舍生留空即可。
 
 const REQUIRED = ['building', 'className', 'name'] as const;
-const COLUMNS = ['building', 'className', 'studentNo', 'name', 'gender', 'room', 'floor', 'company', 'note'] as const;
+const COLUMNS = ['region', 'building', 'className', 'studentNo', 'name', 'gender', 'room', 'floor', 'company', 'note'] as const;
 
 // 簡易 CSV 解析：支援雙引號包欄位、欄位內逗號跟換行
 export function parseCsv(text: string): string[][] {
@@ -86,6 +87,7 @@ export function toRecords(csvText: string): SeedStudent[] {
     }
 
     return {
+      region: get('region') || null,
       building: get('building'),
       className: get('className'),
       studentNo: get('studentNo') || null,

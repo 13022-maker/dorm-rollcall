@@ -6,6 +6,7 @@ import { addStudent, updateStudent, deleteStudent, type StudentInput } from './a
 
 type S = {
   id: number;
+  region: string | null;
   building: string;
   className: string;
   studentNo: string | null;
@@ -18,6 +19,7 @@ type S = {
 };
 
 const EMPTY: StudentInput = {
+  region: '',
   building: '',
   className: '',
   studentNo: '',
@@ -32,6 +34,7 @@ const EMPTY: StudentInput = {
 // 空字串一律轉成 null 再送出，資料庫欄位才會是乾淨的 NULL 而不是空字串
 function normalize(input: StudentInput): StudentInput {
   return {
+    region: input.region?.trim() || null,
     building: input.building.trim(),
     className: input.className.trim(),
     studentNo: input.studentNo?.trim() || null,
@@ -49,6 +52,7 @@ export default function StudentsClient({ students }: { students: S[] }) {
   const [pending, start] = useTransition();
   const [error, setError] = useState('');
 
+  const [region, setRegion] = useState('');
   const [building, setBuilding] = useState('');
   const [q, setQ] = useState('');
 
@@ -60,17 +64,32 @@ export default function StudentsClient({ students }: { students: S[] }) {
 
   const [confirmDeleteId, setConfirmDeleteId] = useState<number | null>(null);
 
-  const buildings = useMemo(() => Array.from(new Set(students.map((s) => s.building))).sort(), [students]);
+  const regions = useMemo(
+    () => Array.from(new Set(students.map((s) => s.region).filter((v): v is string => !!v))).sort(),
+    [students]
+  );
+  // 選了地區時，樓別選單只列出該地區底下的校舍
+  const buildings = useMemo(() => {
+    const inRegion = region ? students.filter((s) => s.region === region) : students;
+    return Array.from(new Set(inRegion.map((s) => s.building))).sort();
+  }, [students, region]);
+
+  function chooseRegion(v: string) {
+    setRegion(v);
+    setBuilding('');
+  }
 
   const filtered = useMemo(() => {
     const kw = q.trim();
     return students
+      .filter((s) => (region ? s.region === region : true))
       .filter((s) => (building ? s.building === building : true))
       .filter((s) => (kw ? s.name.includes(kw) || (s.room ?? '').includes(kw) || s.className.includes(kw) : true));
-  }, [students, building, q]);
+  }, [students, region, building, q]);
 
   function toStudentInput(s: S): StudentInput {
     return {
+      region: s.region,
       building: s.building,
       className: s.className,
       studentNo: s.studentNo,
@@ -148,6 +167,16 @@ export default function StudentsClient({ students }: { students: S[] }) {
       </header>
 
       <section className="filters">
+        {regions.length > 0 && (
+          <select value={region} onChange={(e) => chooseRegion(e.target.value)}>
+            <option value="">全部地區</option>
+            {regions.map((r) => (
+              <option key={r} value={r}>
+                {r}
+              </option>
+            ))}
+          </select>
+        )}
         <select value={building} onChange={(e) => setBuilding(e.target.value)}>
           <option value="">全部樓別</option>
           {buildings.map((b) => (
@@ -171,7 +200,8 @@ export default function StudentsClient({ students }: { students: S[] }) {
       {adding && (
         <div className="card" style={{ marginBottom: 16 }}>
           <div className="editgrid">
-            <input placeholder="樓別（例：A）" value={newRow.building} onChange={(e) => setNewRow({ ...newRow, building: e.target.value })} />
+            <input placeholder="地區（可空，例：明新）" value={newRow.region ?? ''} onChange={(e) => setNewRow({ ...newRow, region: e.target.value })} />
+            <input placeholder="樓別（例：明新A）" value={newRow.building} onChange={(e) => setNewRow({ ...newRow, building: e.target.value })} />
             <input placeholder="班級" value={newRow.className} onChange={(e) => setNewRow({ ...newRow, className: e.target.value })} />
             <input placeholder="姓名" value={newRow.name} onChange={(e) => setNewRow({ ...newRow, name: e.target.value })} />
             <input placeholder="學號（可空）" value={newRow.studentNo ?? ''} onChange={(e) => setNewRow({ ...newRow, studentNo: e.target.value })} />
@@ -202,6 +232,7 @@ export default function StudentsClient({ students }: { students: S[] }) {
         <table>
           <thead>
             <tr>
+              <th>地區</th>
               <th>樓別</th>
               <th>班級</th>
               <th>姓名</th>
@@ -221,6 +252,7 @@ export default function StudentsClient({ students }: { students: S[] }) {
                 <tr key={s.id}>
                   {isEditing ? (
                     <>
+                      <td><input value={editRow.region ?? ''} onChange={(e) => setEditRow({ ...editRow, region: e.target.value })} /></td>
                       <td><input value={editRow.building} onChange={(e) => setEditRow({ ...editRow, building: e.target.value })} /></td>
                       <td><input value={editRow.className} onChange={(e) => setEditRow({ ...editRow, className: e.target.value })} /></td>
                       <td><input value={editRow.name} onChange={(e) => setEditRow({ ...editRow, name: e.target.value })} /></td>
@@ -249,6 +281,7 @@ export default function StudentsClient({ students }: { students: S[] }) {
                     </>
                   ) : (
                     <>
+                      <td className="dim">{s.region ?? '—'}</td>
                       <td>{s.building}</td>
                       <td className="dim">{s.className}</td>
                       <td className="nm">{s.name}</td>
@@ -278,7 +311,7 @@ export default function StudentsClient({ students }: { students: S[] }) {
             })}
             {filtered.length === 0 && (
               <tr>
-                <td colSpan={10} className="empty">沒有符合條件的學生</td>
+                <td colSpan={11} className="empty">沒有符合條件的學生</td>
               </tr>
             )}
           </tbody>

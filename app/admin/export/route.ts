@@ -13,9 +13,10 @@ export async function GET(req: NextRequest) {
   const date = req.nextUrl.searchParams.get('date') || rollcallDateFor(new Date());
   const { rollcallDate, rows } = await getNightRows(date);
 
-  const header = ['樓別', '班級', '房號', '姓名', '性別', '工讀公司', '狀態', '回報時間', '逾時說明'];
+  const header = ['地區', '樓別', '班級', '房號', '姓名', '性別', '工讀公司', '狀態', '回報時間', '逾時說明'];
   const lines = rows.map((r) =>
     [
+      r.region ?? '',
       r.building,
       r.className,
       r.room ?? '',

@@ -12,7 +12,8 @@ import {
 // 住宿學生名單
 export const students = pgTable('students', {
   id: serial('id').primaryKey(),
-  building: text('building').notNull(), // 棟別/宿舍分區，例：'A'、'B'，或建教合作班的合作學校名稱
+  region: text('region'), // 地區（上層分類），例：'明新'、'萬能'、'啟英'；一般宿舍生可為 null
+  building: text('building').notNull(), // 棟別/校舍，例：'明新A'、'萬能男'、'啟英女'
   className: text('class_name').notNull(), // 例：僑資一甲B
   studentNo: text('student_no'), // 部分班級無學號，可為 null
   name: text('name').notNull(),

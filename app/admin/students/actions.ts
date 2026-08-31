@@ -6,6 +6,7 @@ import { eq } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
 
 export type StudentInput = {
+  region: string | null;
   building: string;
   className: string;
   studentNo: string | null;

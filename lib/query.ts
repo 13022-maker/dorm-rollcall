@@ -5,6 +5,7 @@ import { rollcallDateFor, type RowStatus } from './rollcall';
 
 export type NightRow = {
   id: number;
+  region: string | null;
   building: string;
   className: string;
   studentNo: string | null;
@@ -26,6 +27,7 @@ export async function getNightRows(rollcallDate = rollcallDateFor(new Date())): 
   const raw = await db
     .select({
       id: students.id,
+      region: students.region,
       building: students.building,
       className: students.className,
       studentNo: students.studentNo,
@@ -47,6 +49,7 @@ export async function getNightRows(rollcallDate = rollcallDateFor(new Date())): 
 
   const rows: NightRow[] = raw.map((r) => ({
     id: r.id,
+    region: r.region,
     building: r.building,
     className: r.className,
     studentNo: r.studentNo,

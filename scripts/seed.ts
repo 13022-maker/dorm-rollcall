@@ -10,6 +10,7 @@ async function main() {
   await db.execute(sql`TRUNCATE TABLE students RESTART IDENTITY CASCADE`);
   await db.insert(students).values(
     seedStudents.map((s) => ({
+      region: s.region ?? null,
       building: s.building,
       className: s.className,
       studentNo: s.studentNo,
