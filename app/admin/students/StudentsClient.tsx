@@ -2,7 +2,7 @@
 
 import { useMemo, useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
-import { addStudent, updateStudent, deleteStudent, type StudentInput } from './actions';
+import { addStudent, updateStudent, deleteStudent, deleteStudents, type StudentInput } from './actions';
 
 type S = {
   id: number;
@@ -63,6 +63,9 @@ export default function StudentsClient({ students }: { students: S[] }) {
   const [editRow, setEditRow] = useState<StudentInput>(EMPTY);
 
   const [confirmDeleteId, setConfirmDeleteId] = useState<number | null>(null);
+
+  const [selected, setSelected] = useState<Set<number>>(new Set());
+  const [bulkConfirm, setBulkConfirm] = useState(false);
 
   const regions = useMemo(
     () => Array.from(new Set(students.map((s) => s.region).filter((v): v is string => !!v))).sort(),
@@ -154,6 +157,50 @@ export default function StudentsClient({ students }: { students: S[] }) {
     });
   }
 
+  // 目前篩選結果裡「有被勾選」的那些人（切換篩選條件不會自動清掉勾選，但只會刪掉畫面上看得到的這些）
+  const selectedInView = filtered.filter((s) => selected.has(s.id));
+  const allInViewSelected = filtered.length > 0 && filtered.every((s) => selected.has(s.id));
+
+  function toggleSelect(id: number) {
+    setSelected((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  }
+
+  function toggleSelectAll() {
+    setSelected((prev) => {
+      const next = new Set(prev);
+      if (allInViewSelected) {
+        for (const s of filtered) next.delete(s.id);
+      } else {
+        for (const s of filtered) next.add(s.id);
+      }
+      return next;
+    });
+  }
+
+  function doBulkDelete() {
+    setError('');
+    const ids = selectedInView.map((s) => s.id);
+    start(async () => {
+      const r = await deleteStudents(ids);
+      if (!r.ok) {
+        setError(r.message);
+        return;
+      }
+      setSelected((prev) => {
+        const next = new Set(prev);
+        for (const id of ids) next.delete(id);
+        return next;
+      });
+      setBulkConfirm(false);
+      router.refresh();
+    });
+  }
+
   return (
     <main className="wrap wide">
       <header className="head row">
@@ -228,10 +275,37 @@ export default function StudentsClient({ students }: { students: S[] }) {
 
       <p className="count">符合 {filtered.length} 人</p>
 
+      {selectedInView.length > 0 && (
+        <div className="card" style={{ marginBottom: 12, display: 'flex', alignItems: 'center', gap: 12 }}>
+          <span>已選取 {selectedInView.length} 人</span>
+          {bulkConfirm ? (
+            <>
+              <button className="btn danger sm" disabled={pending} onClick={doBulkDelete}>
+                確定刪除這 {selectedInView.length} 人
+              </button>
+              <button className="btn ghost sm" onClick={() => setBulkConfirm(false)}>取消</button>
+            </>
+          ) : (
+            <>
+              <button className="btn danger sm" onClick={() => setBulkConfirm(true)}>刪除選取</button>
+              <button className="btn ghost sm" onClick={() => setSelected(new Set())}>清除選取</button>
+            </>
+          )}
+        </div>
+      )}
+
       <div className="tablewrap">
         <table>
           <thead>
             <tr>
+              <th>
+                <input
+                  type="checkbox"
+                  checked={allInViewSelected}
+                  onChange={toggleSelectAll}
+                  aria-label="全選"
+                />
+              </th>
               <th>地區</th>
               <th>樓別</th>
               <th>班級</th>
@@ -250,6 +324,14 @@ export default function StudentsClient({ students }: { students: S[] }) {
               const isEditing = editingId === s.id;
               return (
                 <tr key={s.id}>
+                  <td>
+                    <input
+                      type="checkbox"
+                      checked={selected.has(s.id)}
+                      onChange={() => toggleSelect(s.id)}
+                      aria-label={`選取 ${s.name}`}
+                    />
+                  </td>
                   {isEditing ? (
                     <>
                       <td><input value={editRow.region ?? ''} onChange={(e) => setEditRow({ ...editRow, region: e.target.value })} /></td>
@@ -311,7 +393,7 @@ export default function StudentsClient({ students }: { students: S[] }) {
             })}
             {filtered.length === 0 && (
               <tr>
-                <td colSpan={11} className="empty">沒有符合條件的學生</td>
+                <td colSpan={12} className="empty">沒有符合條件的學生</td>
               </tr>
             )}
           </tbody>

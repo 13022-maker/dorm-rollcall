@@ -2,7 +2,7 @@
 
 import { db } from '@/db';
 import { students } from '@/db/schema';
-import { eq } from 'drizzle-orm';
+import { eq, inArray } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
 
 export type StudentInput = {
@@ -69,6 +69,23 @@ export async function deleteStudent(id: number): Promise<ActionResult> {
     await db.delete(students).where(eq(students.id, id));
   } catch (e) {
     console.error('deleteStudent failed', e);
+    return { ok: false, message: '刪除失敗，請稍後再試' };
+  }
+
+  revalidatePath('/admin/students');
+  revalidatePath('/admin');
+  revalidatePath('/report');
+  return { ok: true };
+}
+
+// 批次刪除多位學生（連同他們的回報紀錄一起刪除）
+export async function deleteStudents(ids: number[]): Promise<ActionResult> {
+  if (ids.length === 0) return { ok: true };
+
+  try {
+    await db.delete(students).where(inArray(students.id, ids));
+  } catch (e) {
+    console.error('deleteStudents failed', e);
     return { ok: false, message: '刪除失敗，請稍後再試' };
   }
 
