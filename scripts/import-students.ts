@@ -89,6 +89,32 @@ export function toRecords(csvText: string): SeedStudent[] {
   });
 }
 
+// 判斷重複的依據：同棟別 + 同房號 + 同姓名。學號大部分是空的，不能拿來當唯一鍵。
+function dupKey(r: Pick<SeedStudent, 'building' | 'room' | 'name'>): string {
+  return `${r.building}|${r.room ?? ''}|${r.name}`;
+}
+
+// 過濾掉「已經在資料庫裡」跟「CSV 內自己重複」的列，回傳可以真的寫入的跟被跳過的
+export function dedupe(
+  records: SeedStudent[],
+  existing: Pick<SeedStudent, 'building' | 'room' | 'name'>[]
+): { toInsert: SeedStudent[]; skipped: SeedStudent[] } {
+  const seen = new Set(existing.map(dupKey));
+  const toInsert: SeedStudent[] = [];
+  const skipped: SeedStudent[] = [];
+
+  for (const r of records) {
+    const key = dupKey(r);
+    if (seen.has(key)) {
+      skipped.push(r);
+    } else {
+      seen.add(key); // 同一批 CSV 裡也可能自己重複，第一筆留下、之後都算重複
+      toInsert.push(r);
+    }
+  }
+  return { toInsert, skipped };
+}
+
 // 把新名單附加進 db/students.seed.ts，讓 db:seed（重建資料庫時）也會包含這批人
 function appendToSeedFile(records: SeedStudent[]) {
   const path = new URL('../db/students.seed.ts', import.meta.url);
@@ -118,14 +144,31 @@ async function main() {
 
   const csvText = readFileSync(file, 'utf-8');
   const records = toRecords(csvText);
+  console.log(`解析到 ${records.length} 筆。`);
 
-  console.log(`解析到 ${records.length} 筆，開始寫入資料庫…`);
-  await db.insert(students).values(records);
+  const existing = await db
+    .select({ building: students.building, room: students.room, name: students.name })
+    .from(students);
+
+  const { toInsert, skipped } = dedupe(records, existing);
+
+  if (skipped.length > 0) {
+    console.log(`略過 ${skipped.length} 筆重複（同棟別＋房號＋姓名已存在，不會重複寫入）：`);
+    for (const r of skipped) console.log(`  - ${r.building} 棟 ${r.room ?? '未分配房'} ${r.name}`);
+  }
+
+  if (toInsert.length === 0) {
+    console.log('沒有新資料要寫入，結束。');
+    process.exit(0);
+  }
+
+  console.log(`開始寫入資料庫（${toInsert.length} 筆）…`);
+  await db.insert(students).values(toInsert);
 
   console.log('同步寫入 db/students.seed.ts…');
-  appendToSeedFile(records);
+  appendToSeedFile(toInsert);
 
-  console.log(`完成，已新增 ${records.length} 位學生（既有名單與回報紀錄不受影響）。`);
+  console.log(`完成，已新增 ${toInsert.length} 位學生（既有名單與回報紀錄不受影響）。`);
   process.exit(0);
 }
 
