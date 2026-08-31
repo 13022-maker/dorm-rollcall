@@ -13,7 +13,7 @@ export type SeedStudent = {
 
 export const seedStudents: SeedStudent[] = [
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資一甲B",
     "studentNo": null,
     "name": "唐國榮",
@@ -23,7 +23,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資一甲B",
     "studentNo": null,
     "name": "廖貴熙",
@@ -33,7 +33,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資一甲B",
     "studentNo": null,
     "name": "阮潘進才",
@@ -43,7 +43,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資一甲B",
     "studentNo": null,
     "name": "鄭達成",
@@ -53,7 +53,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資一甲B",
     "studentNo": null,
     "name": "冼天棋",
@@ -63,7 +63,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資一甲B",
     "studentNo": null,
     "name": "張發龍",
@@ -73,7 +73,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資一甲B",
     "studentNo": null,
     "name": "阮武嘉龍",
@@ -83,7 +83,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資一甲B",
     "studentNo": null,
     "name": "黃德富",
@@ -93,7 +93,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資一甲B",
     "studentNo": null,
     "name": "何侶俊傑",
@@ -103,7 +103,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資一甲B",
     "studentNo": null,
     "name": "吳文達",
@@ -113,7 +113,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資一甲B",
     "studentNo": null,
     "name": "周為貴",
@@ -123,7 +123,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資一甲B",
     "studentNo": null,
     "name": "阮福盛",
@@ -133,7 +133,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資一甲B",
     "studentNo": null,
     "name": "鄭家福",
@@ -143,7 +143,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資一甲B",
     "studentNo": null,
     "name": "陳英福",
@@ -153,7 +153,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資一甲B",
     "studentNo": null,
     "name": "嚴彩琳",
@@ -163,7 +163,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資一甲B",
     "studentNo": null,
     "name": "張德蓮",
@@ -173,7 +173,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資一甲B",
     "studentNo": null,
     "name": "趙氏清玄",
@@ -183,7 +183,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資一甲B",
     "studentNo": null,
     "name": "姚兆芳",
@@ -193,7 +193,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資一甲B",
     "studentNo": null,
     "name": "吳家琪",
@@ -203,7 +203,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資一甲B",
     "studentNo": null,
     "name": "宋垂莊",
@@ -213,7 +213,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資一甲B",
     "studentNo": null,
     "name": "陳金玉",
@@ -223,7 +223,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資一甲B",
     "studentNo": null,
     "name": "譚斯慇",
@@ -233,7 +233,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資一甲B",
     "studentNo": null,
     "name": "黎水香",
@@ -243,7 +243,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資一甲B",
     "studentNo": null,
     "name": "鍾文恩",
@@ -253,7 +253,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資一甲B",
     "studentNo": null,
     "name": "吳家佳",
@@ -263,7 +263,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資一甲B",
     "studentNo": null,
     "name": "陳嘉欣",
@@ -273,7 +273,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資一甲B",
     "studentNo": null,
     "name": "潘竹玲",
@@ -283,7 +283,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資一甲B",
     "studentNo": null,
     "name": "沈氏春",
@@ -293,7 +293,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資一甲B",
     "studentNo": null,
     "name": "阮雪梅",
@@ -303,7 +303,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資二甲B",
     "studentNo": null,
     "name": "唐國利",
@@ -313,7 +313,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資二甲B",
     "studentNo": "481218",
     "name": "張亞心",
@@ -323,7 +323,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資二甲B",
     "studentNo": "481213",
     "name": "林首望",
@@ -333,7 +333,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資二甲B",
     "studentNo": "481214",
     "name": "武必貴",
@@ -343,7 +343,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資二甲B",
     "studentNo": "481211",
     "name": "阮成義",
@@ -353,7 +353,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資二甲B",
     "studentNo": "481216",
     "name": "唐國發",
@@ -363,7 +363,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資二甲B",
     "studentNo": "481221",
     "name": "陳清豐富",
@@ -373,7 +373,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資二甲B",
     "studentNo": "481224",
     "name": "甯玉清松",
@@ -383,7 +383,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資二甲B",
     "studentNo": "481215",
     "name": "洪智海",
@@ -393,7 +393,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資二甲B",
     "studentNo": "481230",
     "name": "葉開進",
@@ -403,7 +403,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資二甲B",
     "studentNo": "481208",
     "name": "李定傑",
@@ -413,7 +413,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資二甲B",
     "studentNo": "481212",
     "name": "阮黃家寶",
@@ -423,7 +423,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資二甲B",
     "studentNo": "481207",
     "name": "李其添",
@@ -433,7 +433,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資二甲B",
     "studentNo": "481209",
     "name": "李偉君",
@@ -443,7 +443,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資二甲B",
     "studentNo": "481202",
     "name": "氏豪",
@@ -453,7 +453,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資二甲B",
     "studentNo": "481223",
     "name": "曾駱俊",
@@ -463,7 +463,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資二甲B",
     "studentNo": "481203",
     "name": "何玉茶媚",
@@ -473,7 +473,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資二甲B",
     "studentNo": "481204",
     "name": "何美慧",
@@ -483,7 +483,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資二甲B",
     "studentNo": "481210",
     "name": "李寶千",
@@ -493,7 +493,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資二甲B",
     "studentNo": "481220",
     "name": "陳明孝",
@@ -503,7 +503,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資二甲B",
     "studentNo": "481217",
     "name": "唐詠如",
@@ -513,7 +513,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資二甲B",
     "studentNo": "481232",
     "name": "趙氏雪雲",
@@ -523,7 +523,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資二甲B",
     "studentNo": "481233",
     "name": "盤玉玲",
@@ -533,7 +533,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資二甲B",
     "studentNo": "481234",
     "name": "蔡恩桂",
@@ -543,7 +543,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資二甲B",
     "studentNo": "481201",
     "name": "文氏翠雲",
@@ -553,7 +553,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資二甲B",
     "studentNo": "481205",
     "name": "李氏金莊",
@@ -563,7 +563,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資二甲B",
     "studentNo": "481206",
     "name": "李氏金雲",
@@ -573,7 +573,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資二甲B",
     "studentNo": "481227",
     "name": "黃鴛芳",
@@ -583,7 +583,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資三甲B",
     "studentNo": "381227",
     "name": "黃光雄",
@@ -593,7 +593,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資三甲B",
     "studentNo": "381228",
     "name": "黃至君",
@@ -603,7 +603,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資三甲B",
     "studentNo": "381226",
     "name": "黃企宏",
@@ -613,7 +613,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資三甲B",
     "studentNo": "381240",
     "name": "盤廣光",
@@ -623,7 +623,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資三甲B",
     "studentNo": "381241",
     "name": "蔡權玲",
@@ -633,7 +633,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資三甲B",
     "studentNo": "381223",
     "name": "曾李福",
@@ -643,7 +643,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資三甲B",
     "studentNo": "381235",
     "name": "廖日天",
@@ -653,7 +653,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資三甲B",
     "studentNo": "381242",
     "name": "鄧雲祥",
@@ -663,7 +663,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資三甲B",
     "studentNo": "381245",
     "name": "蘇世平",
@@ -673,7 +673,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資三甲B",
     "studentNo": "381209",
     "name": "阮英其",
@@ -683,7 +683,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資三甲B",
     "studentNo": "381214",
     "name": "武黃輝寶",
@@ -693,7 +693,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資三甲B",
     "studentNo": "381220",
     "name": "張發金",
@@ -703,7 +703,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資三甲B",
     "studentNo": "381246",
     "name": "李佳薇",
@@ -713,7 +713,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資三甲B",
     "studentNo": "381247",
     "name": "李林美",
@@ -723,7 +723,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資三甲B",
     "studentNo": "381204",
     "name": "余玉杏",
@@ -733,7 +733,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資三甲B",
     "studentNo": "381215",
     "name": "胡氏芳容",
@@ -743,7 +743,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "B",
+    "building": "明新B",
     "className": "僑資三甲B",
     "studentNo": "381243",
     "name": "鄭金英",
@@ -753,7 +753,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資一甲A",
     "studentNo": null,
     "name": "范登科",
@@ -763,7 +763,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資一甲A",
     "studentNo": null,
     "name": "湯大杰",
@@ -773,7 +773,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資一甲A",
     "studentNo": null,
     "name": "溫家倫",
@@ -783,7 +783,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資一甲A",
     "studentNo": null,
     "name": "劉玉龍",
@@ -793,7 +793,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資一甲A",
     "studentNo": null,
     "name": "吳李福",
@@ -803,7 +803,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資一甲A",
     "studentNo": null,
     "name": "黃亞康",
@@ -813,7 +813,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資一甲A",
     "studentNo": null,
     "name": "范美芳",
@@ -823,7 +823,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資一甲A",
     "studentNo": null,
     "name": "馬家惠",
@@ -833,7 +833,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資一甲A",
     "studentNo": null,
     "name": "王玉英",
@@ -843,7 +843,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資一甲A",
     "studentNo": null,
     "name": "王玉雲",
@@ -853,7 +853,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資一甲A",
     "studentNo": null,
     "name": "劉氏翠雲",
@@ -863,7 +863,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資一甲A",
     "studentNo": null,
     "name": "黎光天",
@@ -873,7 +873,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資一甲A",
     "studentNo": null,
     "name": "阮春壽",
@@ -883,7 +883,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資一甲A",
     "studentNo": null,
     "name": "阮維光",
@@ -893,7 +893,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資一甲A",
     "studentNo": null,
     "name": "陳明德",
@@ -903,7 +903,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資一甲A",
     "studentNo": null,
     "name": "葉成金",
@@ -913,7 +913,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資一甲A",
     "studentNo": null,
     "name": "趙齡輝",
@@ -923,7 +923,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資一甲A",
     "studentNo": null,
     "name": "朱金發",
@@ -933,7 +933,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資一甲A",
     "studentNo": null,
     "name": "嚴富慶",
@@ -943,7 +943,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資一甲A",
     "studentNo": null,
     "name": "唐美緣",
@@ -953,7 +953,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資一甲A",
     "studentNo": null,
     "name": "祁氏如玉",
@@ -963,7 +963,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資一甲A",
     "studentNo": null,
     "name": "許美玲",
@@ -973,7 +973,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資一甲A",
     "studentNo": null,
     "name": "陳玉天金",
@@ -983,7 +983,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資一甲A",
     "studentNo": null,
     "name": "馮錦雲",
@@ -993,7 +993,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資一甲A",
     "studentNo": null,
     "name": "盧鴛媚",
@@ -1003,7 +1003,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資一甲A",
     "studentNo": null,
     "name": "范氏玉鳳",
@@ -1013,7 +1013,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資一甲A",
     "studentNo": null,
     "name": "陳潘丹長",
@@ -1023,7 +1023,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資一甲A",
     "studentNo": null,
     "name": "謝明光",
@@ -1033,7 +1033,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資二甲A",
     "studentNo": "481120",
     "name": "黃家寶",
@@ -1043,7 +1043,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資二甲A",
     "studentNo": "481124",
     "name": "楊高福",
@@ -1053,7 +1053,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資二甲A",
     "studentNo": "481107",
     "name": "阮家貴",
@@ -1063,7 +1063,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資二甲A",
     "studentNo": "481129",
     "name": "鄧國大",
@@ -1073,7 +1073,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資二甲A",
     "studentNo": "481130",
     "name": "鄧福輝",
@@ -1083,7 +1083,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資二甲A",
     "studentNo": "481133",
     "name": "賴羅發",
@@ -1093,7 +1093,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資二甲A",
     "studentNo": "481134",
     "name": "龐才祿",
@@ -1103,7 +1103,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資二甲A",
     "studentNo": "481108",
     "name": "阮晉達",
@@ -1113,7 +1113,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資二甲A",
     "studentNo": "481109",
     "name": "阮清平",
@@ -1123,7 +1123,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資二甲A",
     "studentNo": "481111",
     "name": "韋海龍",
@@ -1133,7 +1133,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資二甲A",
     "studentNo": "481112",
     "name": "韋國才",
@@ -1143,7 +1143,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資二甲A",
     "studentNo": "481113",
     "name": "韋國晉",
@@ -1153,7 +1153,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資二甲A",
     "studentNo": "481117",
     "name": "曾李權",
@@ -1163,7 +1163,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資二甲A",
     "studentNo": "481104",
     "name": "何義才",
@@ -1173,7 +1173,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資二甲A",
     "studentNo": "481118",
     "name": "黃氏雪如",
@@ -1183,7 +1183,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資二甲A",
     "studentNo": "481123",
     "name": "楊珮玉",
@@ -1193,7 +1193,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資二甲A",
     "studentNo": "481131",
     "name": "黎氏芳薇",
@@ -1203,7 +1203,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資二甲A",
     "studentNo": "481132",
     "name": "黎氏英書",
@@ -1213,7 +1213,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資二甲A",
     "studentNo": "481110",
     "name": "段玉珊",
@@ -1223,7 +1223,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資二甲A",
     "studentNo": "481115",
     "name": "張金萍",
@@ -1233,7 +1233,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資二甲A",
     "studentNo": "481128",
     "name": "盤嬌娥",
@@ -1243,7 +1243,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資二甲A",
     "studentNo": "481103",
     "name": "江明雪",
@@ -1253,7 +1253,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資二甲A",
     "studentNo": "481125",
     "name": "楊瓊英",
@@ -1263,7 +1263,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資二甲A",
     "studentNo": "481126",
     "name": "楊瓊華",
@@ -1273,7 +1273,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資二甲A",
     "studentNo": null,
     "name": "張月鳳",
@@ -1283,7 +1283,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資二甲A",
     "studentNo": "481102",
     "name": "石潮鴻",
@@ -1293,7 +1293,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資二甲A",
     "studentNo": "481116",
     "name": "傅美容",
@@ -1303,7 +1303,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資二甲A",
     "studentNo": "481135",
     "name": "蘇美鳳",
@@ -1313,7 +1313,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資三甲A",
     "studentNo": "381119",
     "name": "唐德龍",
@@ -1323,7 +1323,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資三甲A",
     "studentNo": "381146",
     "name": "李金明",
@@ -1333,7 +1333,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資三甲A",
     "studentNo": "381147",
     "name": "張浩",
@@ -1343,7 +1343,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資三甲A",
     "studentNo": "381107",
     "name": "李華源",
@@ -1353,7 +1353,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資三甲A",
     "studentNo": "381118",
     "name": "范德信",
@@ -1363,7 +1363,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資三甲A",
     "studentNo": "381126",
     "name": "曾明達",
@@ -1373,7 +1373,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資三甲A",
     "studentNo": "381145",
     "name": "蘇光明",
@@ -1383,7 +1383,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資三甲A",
     "studentNo": "381109",
     "name": "沈月生",
@@ -1393,7 +1393,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資三甲A",
     "studentNo": "381120",
     "name": "徐昌新",
@@ -1403,7 +1403,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資三甲A",
     "studentNo": "381121",
     "name": "徐從傑",
@@ -1413,7 +1413,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資三甲A",
     "studentNo": "381116",
     "name": "林寶貴",
@@ -1423,7 +1423,7 @@ export const seedStudents: SeedStudent[] = [
     "note": null
   },
   {
-    "building": "A",
+    "building": "明新A",
     "className": "僑資三甲A",
     "studentNo": "381125",
     "name": "陳官蓮",
