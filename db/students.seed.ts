@@ -1,4 +1,4 @@
-// 由住宿名單自動產生（373 人）。日後名單異動改這裡再重跑 seed。
+// 由住宿名單自動產生（365 人）。日後名單異動改這裡再重跑 seed。
 export type SeedStudent = {
   region?: string | null; // 地區（上層分類），例：'明新'、'萬能'、'啟英'；一般宿舍生可省略
   building: string; // 棟別代號，例：'A'、'B'、'C'…
@@ -9,6 +9,7 @@ export type SeedStudent = {
   room: string | null;
   floor: number | null;
   company?: string | null; // 建教合作班的工讀公司，一般宿舍生沒有可省略
+  active?: boolean | null; // false = 目前不住宿舍，不列入回報/統計；省略或 null 視為 true
   note: string | null;
 };
 
@@ -23,6 +24,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "401",
     "floor": null,
     "company": null,
+    "active": true,
     "note": "華語文未過"
   },
   {
@@ -35,6 +37,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "401",
     "floor": null,
     "company": null,
+    "active": true,
     "note": "退廠"
   },
   {
@@ -47,6 +50,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "401",
     "floor": null,
     "company": null,
+    "active": true,
     "note": "退廠"
   },
   {
@@ -59,6 +63,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "401",
     "floor": null,
     "company": null,
+    "active": true,
     "note": "退廠"
   },
   {
@@ -71,6 +76,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "402",
     "floor": null,
     "company": "碩陽",
+    "active": true,
     "note": "實習住校"
   },
   {
@@ -83,6 +89,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "402",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -95,6 +102,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "402",
     "floor": null,
     "company": "碩陽",
+    "active": true,
     "note": "實習住校"
   },
   {
@@ -107,6 +115,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "402",
     "floor": null,
     "company": "碩陽",
+    "active": true,
     "note": "實習住校"
   },
   {
@@ -119,6 +128,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "404",
     "floor": null,
     "company": "小林",
+    "active": true,
     "note": null
   },
   {
@@ -131,6 +141,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "404",
     "floor": null,
     "company": "小林",
+    "active": true,
     "note": null
   },
   {
@@ -143,6 +154,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "404",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -155,6 +167,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "404",
     "floor": null,
     "company": "小林",
+    "active": true,
     "note": null
   },
   {
@@ -167,6 +180,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "405",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -179,6 +193,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "405",
     "floor": null,
     "company": "名留",
+    "active": true,
     "note": null
   },
   {
@@ -191,6 +206,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "405",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -203,6 +219,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "405",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -215,6 +232,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "406",
     "floor": null,
     "company": "名留",
+    "active": true,
     "note": null
   },
   {
@@ -227,6 +245,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "406",
     "floor": null,
     "company": "名留",
+    "active": true,
     "note": null
   },
   {
@@ -239,6 +258,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "406",
     "floor": null,
     "company": "名留",
+    "active": true,
     "note": null
   },
   {
@@ -251,6 +271,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "406",
     "floor": null,
     "company": "名留",
+    "active": true,
     "note": null
   },
   {
@@ -263,6 +284,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "407",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -275,6 +297,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "407",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -287,6 +310,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "407",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -299,6 +323,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "407",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -311,6 +336,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "408",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -323,6 +349,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "408",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -335,6 +362,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "408",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -347,6 +375,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "408",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -359,6 +388,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "501",
     "floor": null,
     "company": "小林",
+    "active": true,
     "note": null
   },
   {
@@ -371,6 +401,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "501",
     "floor": null,
     "company": "小林",
+    "active": true,
     "note": null
   },
   {
@@ -383,6 +414,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "501",
     "floor": null,
     "company": "小林",
+    "active": true,
     "note": null
   },
   {
@@ -395,6 +427,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "502",
     "floor": null,
     "company": "名留",
+    "active": true,
     "note": null
   },
   {
@@ -407,6 +440,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "502",
     "floor": null,
     "company": "台林",
+    "active": true,
     "note": null
   },
   {
@@ -419,6 +453,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "502",
     "floor": null,
     "company": "名留",
+    "active": true,
     "note": null
   },
   {
@@ -431,6 +466,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "503",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -443,6 +479,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "503",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -455,6 +492,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "503",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -467,6 +505,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "503",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -479,6 +518,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "504",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -491,6 +531,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "504",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -503,6 +544,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "504",
     "floor": null,
     "company": "小林",
+    "active": true,
     "note": null
   },
   {
@@ -515,6 +557,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "504",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -527,6 +570,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "505",
     "floor": null,
     "company": "尖點",
+    "active": true,
     "note": null
   },
   {
@@ -539,6 +583,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "505",
     "floor": null,
     "company": "尖點",
+    "active": true,
     "note": null
   },
   {
@@ -551,6 +596,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "505",
     "floor": null,
     "company": "尖點",
+    "active": true,
     "note": null
   },
   {
@@ -563,6 +609,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "505",
     "floor": null,
     "company": "尖點",
+    "active": true,
     "note": null
   },
   {
@@ -575,6 +622,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "506",
     "floor": null,
     "company": "台林",
+    "active": true,
     "note": null
   },
   {
@@ -587,6 +635,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "506",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -599,6 +648,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "506",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -611,6 +661,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "506",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -623,6 +674,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "507",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -635,6 +687,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "507",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -647,6 +700,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "507",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -659,6 +713,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "507",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -671,6 +726,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "508",
     "floor": null,
     "company": "小林",
+    "active": true,
     "note": null
   },
   {
@@ -683,6 +739,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "508",
     "floor": null,
     "company": "小林",
+    "active": true,
     "note": null
   },
   {
@@ -695,6 +752,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "508",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -707,6 +765,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "508",
     "floor": null,
     "company": "小林",
+    "active": true,
     "note": null
   },
   {
@@ -719,6 +778,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "509",
     "floor": null,
     "company": "小林",
+    "active": true,
     "note": null
   },
   {
@@ -731,6 +791,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "509",
     "floor": null,
     "company": "小林",
+    "active": true,
     "note": null
   },
   {
@@ -743,6 +804,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "509",
     "floor": null,
     "company": "小林",
+    "active": true,
     "note": null
   },
   {
@@ -755,6 +817,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "509",
     "floor": null,
     "company": "小林",
+    "active": true,
     "note": null
   },
   {
@@ -767,6 +830,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "510",
     "floor": null,
     "company": null,
+    "active": true,
     "note": "退廠"
   },
   {
@@ -779,6 +843,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "607",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -791,6 +856,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "607",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -803,6 +869,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "607",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -815,6 +882,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "607",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -827,6 +895,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "201",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -839,6 +908,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "201",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -851,6 +921,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "201",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -863,6 +934,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "202",
     "floor": null,
     "company": "尖點",
+    "active": true,
     "note": null
   },
   {
@@ -875,6 +947,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "202",
     "floor": null,
     "company": "尖點",
+    "active": true,
     "note": null
   },
   {
@@ -887,6 +960,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "202",
     "floor": null,
     "company": "尖點",
+    "active": true,
     "note": null
   },
   {
@@ -899,6 +973,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "202",
     "floor": null,
     "company": "尖點",
+    "active": true,
     "note": null
   },
   {
@@ -911,6 +986,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "203",
     "floor": null,
     "company": "模帝科",
+    "active": true,
     "note": null
   },
   {
@@ -923,6 +999,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "203",
     "floor": null,
     "company": "模帝科",
+    "active": true,
     "note": null
   },
   {
@@ -935,6 +1012,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "203",
     "floor": null,
     "company": "模帝科",
+    "active": true,
     "note": null
   },
   {
@@ -947,6 +1025,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "203",
     "floor": null,
     "company": "模帝科",
+    "active": true,
     "note": null
   },
   {
@@ -959,6 +1038,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "204",
     "floor": null,
     "company": "佳鼎",
+    "active": true,
     "note": null
   },
   {
@@ -971,6 +1051,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "204",
     "floor": null,
     "company": "佳鼎",
+    "active": true,
     "note": null
   },
   {
@@ -983,6 +1064,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "204",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -995,6 +1077,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "204",
     "floor": null,
     "company": "佳鼎",
+    "active": true,
     "note": null
   },
   {
@@ -1007,6 +1090,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "205",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -1019,6 +1103,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "205",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -1031,6 +1116,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "205",
     "floor": null,
     "company": "泰詠",
+    "active": true,
     "note": null
   },
   {
@@ -1043,6 +1129,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "205",
     "floor": null,
     "company": "泰詠",
+    "active": true,
     "note": null
   },
   {
@@ -1055,6 +1142,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "206",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -1067,6 +1155,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "206",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -1079,6 +1168,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "206",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -1091,6 +1181,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "206",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -1103,6 +1194,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "207",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -1115,6 +1207,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "207",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -1127,6 +1220,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "207",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -1139,6 +1233,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "207",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -1151,6 +1246,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "208",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -1163,6 +1259,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "208",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -1175,6 +1272,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "208",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -1187,6 +1285,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "208",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -1199,6 +1298,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "301",
     "floor": null,
     "company": null,
+    "active": true,
     "note": "退廠"
   },
   {
@@ -1211,6 +1311,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "301",
     "floor": null,
     "company": null,
+    "active": true,
     "note": "退廠"
   },
   {
@@ -1223,6 +1324,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "301",
     "floor": null,
     "company": null,
+    "active": true,
     "note": "退廠"
   },
   {
@@ -1235,6 +1337,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "302",
     "floor": null,
     "company": "佳鼎",
+    "active": true,
     "note": null
   },
   {
@@ -1247,6 +1350,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "302",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -1259,6 +1363,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "302",
     "floor": null,
     "company": "模帝科",
+    "active": true,
     "note": null
   },
   {
@@ -1271,6 +1376,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "302",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -1283,6 +1389,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "303",
     "floor": null,
     "company": null,
+    "active": true,
     "note": "華語文未過"
   },
   {
@@ -1295,6 +1402,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "303",
     "floor": null,
     "company": null,
+    "active": true,
     "note": "華語文未過"
   },
   {
@@ -1307,6 +1415,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "303",
     "floor": null,
     "company": null,
+    "active": true,
     "note": "華語文未過"
   },
   {
@@ -1319,6 +1428,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "303",
     "floor": null,
     "company": null,
+    "active": true,
     "note": "欲休學"
   },
   {
@@ -1331,6 +1441,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "304",
     "floor": null,
     "company": null,
+    "active": true,
     "note": "退廠"
   },
   {
@@ -1343,6 +1454,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "304",
     "floor": null,
     "company": null,
+    "active": true,
     "note": "退廠"
   },
   {
@@ -1355,6 +1467,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "304",
     "floor": null,
     "company": null,
+    "active": true,
     "note": "退廠"
   },
   {
@@ -1367,6 +1480,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "304",
     "floor": null,
     "company": null,
+    "active": true,
     "note": "退廠"
   },
   {
@@ -1379,6 +1493,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "305",
     "floor": null,
     "company": null,
+    "active": true,
     "note": "退廠"
   },
   {
@@ -1391,6 +1506,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "305",
     "floor": null,
     "company": null,
+    "active": true,
     "note": "退廠"
   },
   {
@@ -1403,6 +1519,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "305",
     "floor": null,
     "company": "MOMO",
+    "active": true,
     "note": "實習住校"
   },
   {
@@ -1415,6 +1532,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "305",
     "floor": null,
     "company": null,
+    "active": true,
     "note": "退廠"
   },
   {
@@ -1427,6 +1545,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "306",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -1439,6 +1558,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "306",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -1451,6 +1571,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "306",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -1463,102 +1584,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "306",
     "floor": null,
     "company": "鴻佰",
-    "note": null
-  },
-  {
-    "region": "明新",
-    "building": "明新A",
-    "className": "僑資一甲A",
-    "studentNo": null,
-    "name": "嚴富慶",
-    "gender": "男",
-    "room": "1001",
-    "floor": 1,
-    "company": null,
-    "note": null
-  },
-  {
-    "region": "明新",
-    "building": "明新A",
-    "className": "僑資一甲A",
-    "studentNo": null,
-    "name": "朱金發",
-    "gender": "男",
-    "room": "1001",
-    "floor": 1,
-    "company": null,
-    "note": null
-  },
-  {
-    "region": "明新",
-    "building": "明新A",
-    "className": "僑資一甲A",
-    "studentNo": null,
-    "name": "謝明光",
-    "gender": "男",
-    "room": "1001",
-    "floor": 1,
-    "company": null,
-    "note": null
-  },
-  {
-    "region": "明新",
-    "building": "明新A",
-    "className": "僑資一甲A",
-    "studentNo": null,
-    "name": "陳潘丹長",
-    "gender": "男",
-    "room": "1001",
-    "floor": 1,
-    "company": null,
-    "note": null
-  },
-  {
-    "region": "明新",
-    "building": "明新A",
-    "className": "僑資二甲A",
-    "studentNo": "481124",
-    "name": "楊高福",
-    "gender": "男",
-    "room": "1014",
-    "floor": 1,
-    "company": null,
-    "note": null
-  },
-  {
-    "region": "明新",
-    "building": "明新A",
-    "className": "僑資二甲A",
-    "studentNo": "481129",
-    "name": "鄧國大",
-    "gender": "男",
-    "room": "1014",
-    "floor": 1,
-    "company": null,
-    "note": null
-  },
-  {
-    "region": "明新",
-    "building": "明新A",
-    "className": "僑資二甲A",
-    "studentNo": "481107",
-    "name": "阮家貴",
-    "gender": "男",
-    "room": "1014",
-    "floor": 1,
-    "company": null,
-    "note": null
-  },
-  {
-    "region": "明新",
-    "building": "明新A",
-    "className": "僑資二甲A",
-    "studentNo": "481120",
-    "name": "黃家寶",
-    "gender": "男",
-    "room": "1014",
-    "floor": 1,
-    "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -1571,6 +1597,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1023",
     "floor": 1,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -1583,6 +1610,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1023",
     "floor": 1,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -1595,6 +1623,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1023",
     "floor": 1,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -1607,6 +1636,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1023",
     "floor": 1,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -1619,6 +1649,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1026",
     "floor": 1,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -1631,6 +1662,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1026",
     "floor": 1,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -1643,6 +1675,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1026",
     "floor": 1,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -1655,6 +1688,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1026",
     "floor": 1,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -1667,6 +1701,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1028",
     "floor": 1,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -1679,6 +1714,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1028",
     "floor": 1,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -1691,6 +1727,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1028",
     "floor": 1,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -1703,6 +1740,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1028",
     "floor": 1,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -1715,6 +1753,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1032",
     "floor": 1,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -1727,6 +1766,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1032",
     "floor": 1,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -1739,6 +1779,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1032",
     "floor": 1,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -1751,6 +1792,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1032",
     "floor": 1,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -1763,6 +1805,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1038",
     "floor": 1,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -1775,6 +1818,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1038",
     "floor": 1,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -1787,6 +1831,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1038",
     "floor": 1,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -1799,6 +1844,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1038",
     "floor": 1,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -1811,6 +1857,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1101",
     "floor": 1,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -1823,6 +1870,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1101",
     "floor": 1,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -1835,6 +1883,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1101",
     "floor": 1,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -1847,6 +1896,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1101",
     "floor": 1,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -1859,6 +1909,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1106",
     "floor": 1,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -1871,6 +1922,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1106",
     "floor": 1,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -1883,6 +1935,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1106",
     "floor": 1,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -1895,6 +1948,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1114",
     "floor": 1,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -1907,6 +1961,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1114",
     "floor": 1,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -1919,6 +1974,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1114",
     "floor": 1,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -1931,6 +1987,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1115",
     "floor": 1,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -1943,6 +2000,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1115",
     "floor": 1,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -1955,6 +2013,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1115",
     "floor": 1,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -1967,6 +2026,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1417",
     "floor": 4,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -1979,6 +2039,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1417",
     "floor": 4,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -1991,6 +2052,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1417",
     "floor": 4,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -2003,6 +2065,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1417",
     "floor": 4,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -2015,6 +2078,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1419",
     "floor": 4,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -2027,6 +2091,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1420",
     "floor": 4,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -2039,6 +2104,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1420",
     "floor": 4,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -2051,6 +2117,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1420",
     "floor": 4,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -2063,6 +2130,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1420",
     "floor": 4,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -2075,6 +2143,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1460",
     "floor": 4,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -2087,6 +2156,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1460",
     "floor": 4,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -2099,6 +2169,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1460",
     "floor": 4,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -2111,6 +2182,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1510",
     "floor": 5,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -2123,6 +2195,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1510",
     "floor": 5,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -2135,6 +2208,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1510",
     "floor": 5,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -2147,6 +2221,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1510",
     "floor": 5,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -2159,6 +2234,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1511",
     "floor": 5,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -2171,6 +2247,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1511",
     "floor": 5,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -2183,6 +2260,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1511",
     "floor": 5,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -2195,6 +2273,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1511",
     "floor": 5,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -2207,6 +2286,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1516",
     "floor": 5,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -2219,6 +2299,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1516",
     "floor": 5,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -2231,6 +2312,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1516",
     "floor": 5,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -2243,6 +2325,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1516",
     "floor": 5,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -2255,6 +2338,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1530",
     "floor": 5,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -2267,6 +2351,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1530",
     "floor": 5,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -2279,6 +2364,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1530",
     "floor": 5,
     "company": null,
+    "active": false,
     "note": null
   },
   {
@@ -2291,6 +2377,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1001",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2303,6 +2390,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1001",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2315,6 +2403,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1001",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2327,6 +2416,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1001",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2339,6 +2429,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1014",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2351,6 +2442,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1014",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2363,6 +2455,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1014",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2375,6 +2468,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1014",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2387,6 +2481,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1023",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2399,6 +2494,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1023",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2411,6 +2507,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1023",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2423,6 +2520,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1023",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2435,6 +2533,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1026",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2447,6 +2546,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1026",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2459,6 +2559,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1026",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2471,6 +2572,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1026",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2483,6 +2585,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1028",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2495,6 +2598,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1028",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2507,6 +2611,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1028",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2519,6 +2624,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1028",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2531,6 +2637,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1032",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2543,6 +2650,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1032",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2555,6 +2663,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1032",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2567,6 +2676,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1032",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2579,6 +2689,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1038",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2591,6 +2702,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1038",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2603,6 +2715,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1038",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2615,6 +2728,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1038",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2627,6 +2741,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1101",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2639,6 +2754,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1101",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2651,6 +2767,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1101",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2663,6 +2780,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1106",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2675,6 +2793,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1106",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2687,6 +2806,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1106",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2699,6 +2819,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1114",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2711,6 +2832,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1114",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2723,6 +2845,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1114",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2735,6 +2858,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1115",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2747,6 +2871,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1115",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2759,6 +2884,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1115",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2771,6 +2897,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1115",
     "floor": 1,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2783,6 +2910,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1417",
     "floor": 4,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2795,6 +2923,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1417",
     "floor": 4,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2807,6 +2936,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1417",
     "floor": 4,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2819,6 +2949,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1417",
     "floor": 4,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2831,6 +2962,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1420",
     "floor": 4,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2843,6 +2975,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1420",
     "floor": 4,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2855,6 +2988,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1420",
     "floor": 4,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2867,6 +3001,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1420",
     "floor": 4,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2879,6 +3014,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1449",
     "floor": 4,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2891,6 +3027,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1449",
     "floor": 4,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2903,6 +3040,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1449",
     "floor": 4,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2915,6 +3053,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1449",
     "floor": 4,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2927,6 +3066,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1460",
     "floor": 4,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2939,6 +3079,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1460",
     "floor": 4,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2951,6 +3092,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1460",
     "floor": 4,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2963,6 +3105,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1460",
     "floor": 4,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2975,6 +3118,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1510",
     "floor": 5,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2987,6 +3131,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1510",
     "floor": 5,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -2999,6 +3144,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1510",
     "floor": 5,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -3011,6 +3157,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1510",
     "floor": 5,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -3023,6 +3170,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1511",
     "floor": 5,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -3035,6 +3183,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1511",
     "floor": 5,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -3047,6 +3196,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1511",
     "floor": 5,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -3059,6 +3209,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1511",
     "floor": 5,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -3071,6 +3222,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1516",
     "floor": 5,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -3083,6 +3235,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1516",
     "floor": 5,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -3095,6 +3248,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1516",
     "floor": 5,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -3107,6 +3261,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1516",
     "floor": 5,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -3119,6 +3274,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1530",
     "floor": 5,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -3131,6 +3287,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1530",
     "floor": 5,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -3143,6 +3300,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1530",
     "floor": 5,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -3155,6 +3313,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1530",
     "floor": 5,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -3167,6 +3326,7 @@ export const seedStudents: SeedStudent[] = [
     "room": null,
     "floor": null,
     "company": null,
+    "active": true,
     "note": null
   },
   {
@@ -3179,6 +3339,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1201",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -3191,6 +3352,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1201",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -3203,6 +3365,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1201",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -3215,6 +3378,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1201",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -3227,6 +3391,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1202",
     "floor": null,
     "company": "欣興",
+    "active": true,
     "note": null
   },
   {
@@ -3239,6 +3404,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1202",
     "floor": null,
     "company": "欣興",
+    "active": true,
     "note": null
   },
   {
@@ -3251,6 +3417,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1202",
     "floor": null,
     "company": "欣興",
+    "active": true,
     "note": null
   },
   {
@@ -3263,6 +3430,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1202",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -3275,6 +3443,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1203",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -3287,6 +3456,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1203",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -3299,6 +3469,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1203",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -3311,6 +3482,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1203",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -3323,6 +3495,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1204",
     "floor": null,
     "company": "泰詠",
+    "active": true,
     "note": null
   },
   {
@@ -3335,6 +3508,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1204",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -3347,6 +3521,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1204",
     "floor": null,
     "company": "泰詠",
+    "active": true,
     "note": null
   },
   {
@@ -3359,6 +3534,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1204",
     "floor": null,
     "company": "泰詠",
+    "active": true,
     "note": null
   },
   {
@@ -3371,6 +3547,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1205",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -3383,6 +3560,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1205",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -3395,6 +3573,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1205",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -3407,6 +3586,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1205",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -3419,6 +3599,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1207",
     "floor": null,
     "company": "碩陽",
+    "active": true,
     "note": "實習住校"
   },
   {
@@ -3431,6 +3612,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1207",
     "floor": null,
     "company": "碩陽",
+    "active": true,
     "note": "實習住校"
   },
   {
@@ -3443,6 +3625,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1207",
     "floor": null,
     "company": "碩陽",
+    "active": true,
     "note": "實習住校"
   },
   {
@@ -3455,6 +3638,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1208",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -3467,6 +3651,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1208",
     "floor": null,
     "company": "小林",
+    "active": true,
     "note": null
   },
   {
@@ -3479,6 +3664,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1208",
     "floor": null,
     "company": "小林",
+    "active": true,
     "note": null
   },
   {
@@ -3491,6 +3677,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1208",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -3503,6 +3690,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1209",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -3515,6 +3703,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1209",
     "floor": null,
     "company": "尖點",
+    "active": true,
     "note": null
   },
   {
@@ -3527,6 +3716,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1209",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -3539,6 +3729,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1210",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": "實習住校"
   },
   {
@@ -3551,6 +3742,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1211",
     "floor": null,
     "company": "漢來",
+    "active": true,
     "note": null
   },
   {
@@ -3563,6 +3755,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1211",
     "floor": null,
     "company": "漢來",
+    "active": true,
     "note": null
   },
   {
@@ -3575,6 +3768,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1211",
     "floor": null,
     "company": "王品",
+    "active": true,
     "note": null
   },
   {
@@ -3587,6 +3781,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1211",
     "floor": null,
     "company": "王品",
+    "active": true,
     "note": null
   },
   {
@@ -3599,6 +3794,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1212",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -3611,6 +3807,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1212",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -3623,6 +3820,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1212",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -3635,6 +3833,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1212",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -3647,6 +3846,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1215",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -3659,6 +3859,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1215",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -3671,6 +3872,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1215",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -3683,6 +3885,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1215",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -3695,6 +3898,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1216",
     "floor": null,
     "company": "三合院",
+    "active": true,
     "note": "實習住校"
   },
   {
@@ -3707,6 +3911,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1217",
     "floor": null,
     "company": "爭鮮",
+    "active": true,
     "note": "實習住校"
   },
   {
@@ -3719,6 +3924,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1217",
     "floor": null,
     "company": "爭鮮",
+    "active": true,
     "note": "實習住校"
   },
   {
@@ -3731,6 +3937,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1219",
     "floor": null,
     "company": "三商",
+    "active": true,
     "note": "實習住校"
   },
   {
@@ -3743,6 +3950,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1219",
     "floor": null,
     "company": "王品",
+    "active": true,
     "note": "實習住校"
   },
   {
@@ -3755,6 +3963,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1219",
     "floor": null,
     "company": "青青(桃)",
+    "active": true,
     "note": null
   },
   {
@@ -3767,6 +3976,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1219",
     "floor": null,
     "company": "青青(桃)",
+    "active": true,
     "note": null
   },
   {
@@ -3779,6 +3989,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1220",
     "floor": null,
     "company": "欣興",
+    "active": true,
     "note": null
   },
   {
@@ -3791,6 +4002,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1220",
     "floor": null,
     "company": "欣興",
+    "active": true,
     "note": null
   },
   {
@@ -3803,6 +4015,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1220",
     "floor": null,
     "company": "欣興",
+    "active": true,
     "note": null
   },
   {
@@ -3815,6 +4028,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1220",
     "floor": null,
     "company": "欣興",
+    "active": true,
     "note": null
   },
   {
@@ -3827,6 +4041,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1221",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -3839,6 +4054,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1221",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -3851,6 +4067,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1221",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -3863,6 +4080,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1221",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": null
   },
   {
@@ -3875,6 +4093,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1222",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -3887,6 +4106,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1222",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -3899,6 +4119,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1222",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -3911,6 +4132,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1222",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -3923,6 +4145,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1301",
     "floor": null,
     "company": "青青(北)",
+    "active": true,
     "note": null
   },
   {
@@ -3935,6 +4158,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1301",
     "floor": null,
     "company": "青青(北)",
+    "active": true,
     "note": null
   },
   {
@@ -3947,6 +4171,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1301",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -3959,6 +4184,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1301",
     "floor": null,
     "company": "青青(北)",
+    "active": true,
     "note": null
   },
   {
@@ -3971,6 +4197,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1302",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -3983,6 +4210,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1302",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -3995,6 +4223,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1302",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -4007,6 +4236,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1302",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -4019,6 +4249,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1303",
     "floor": null,
     "company": "MOMO",
+    "active": true,
     "note": "實習住校"
   },
   {
@@ -4031,6 +4262,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1303",
     "floor": null,
     "company": "MOMO",
+    "active": true,
     "note": "實習住校"
   },
   {
@@ -4043,6 +4275,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1303",
     "floor": null,
     "company": "MOMO",
+    "active": true,
     "note": "實習住校"
   },
   {
@@ -4055,6 +4288,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1304",
     "floor": null,
     "company": "瓦城",
+    "active": true,
     "note": "實習住校"
   },
   {
@@ -4067,6 +4301,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1305",
     "floor": null,
     "company": "瓦城",
+    "active": true,
     "note": "實習住校"
   },
   {
@@ -4079,6 +4314,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1305",
     "floor": null,
     "company": "瓦城",
+    "active": true,
     "note": "實習住校"
   },
   {
@@ -4091,6 +4327,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1305",
     "floor": null,
     "company": "瓦城",
+    "active": true,
     "note": "實習住校"
   },
   {
@@ -4103,6 +4340,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1305",
     "floor": null,
     "company": "瓦城",
+    "active": true,
     "note": "實習住校"
   },
   {
@@ -4115,6 +4353,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1306",
     "floor": null,
     "company": "三商",
+    "active": true,
     "note": "實習住校"
   },
   {
@@ -4127,6 +4366,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1306",
     "floor": null,
     "company": "王品",
+    "active": true,
     "note": "實習住校"
   },
   {
@@ -4139,6 +4379,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1307",
     "floor": null,
     "company": "點點心",
+    "active": true,
     "note": "實習住校"
   },
   {
@@ -4151,6 +4392,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1307",
     "floor": null,
     "company": "點點心",
+    "active": true,
     "note": "實習住校"
   },
   {
@@ -4163,6 +4405,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1308",
     "floor": null,
     "company": "瓦城",
+    "active": true,
     "note": "實習住校"
   },
   {
@@ -4175,6 +4418,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1308",
     "floor": null,
     "company": "三商",
+    "active": true,
     "note": "實習住校"
   },
   {
@@ -4187,6 +4431,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1309",
     "floor": null,
     "company": "名留",
+    "active": true,
     "note": "實習住校"
   },
   {
@@ -4199,6 +4444,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1310",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -4211,6 +4457,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1310",
     "floor": null,
     "company": "曼都",
+    "active": true,
     "note": "實習住校"
   },
   {
@@ -4223,6 +4470,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1311",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -4235,6 +4483,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1311",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -4247,6 +4496,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1311",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -4259,6 +4509,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1312",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -4271,6 +4522,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1312",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -4283,6 +4535,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1312",
     "floor": null,
     "company": "漢來",
+    "active": true,
     "note": null
   },
   {
@@ -4295,6 +4548,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1312",
     "floor": null,
     "company": "漢來",
+    "active": true,
     "note": null
   },
   {
@@ -4307,6 +4561,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1314",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -4319,6 +4574,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1314",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -4331,6 +4587,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1314",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -4343,6 +4600,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1314",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -4355,6 +4613,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1315",
     "floor": null,
     "company": "小林",
+    "active": true,
     "note": null
   },
   {
@@ -4367,6 +4626,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1315",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -4379,6 +4639,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1315",
     "floor": null,
     "company": "欣興",
+    "active": true,
     "note": null
   },
   {
@@ -4391,6 +4652,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1315",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -4403,6 +4665,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1316",
     "floor": null,
     "company": "欣興",
+    "active": true,
     "note": null
   },
   {
@@ -4415,6 +4678,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1316",
     "floor": null,
     "company": "欣興",
+    "active": true,
     "note": null
   },
   {
@@ -4427,6 +4691,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1316",
     "floor": null,
     "company": "欣興",
+    "active": true,
     "note": null
   },
   {
@@ -4439,6 +4704,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1316",
     "floor": null,
     "company": "欣興",
+    "active": true,
     "note": null
   },
   {
@@ -4451,6 +4717,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1317",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -4463,6 +4730,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1317",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -4475,6 +4743,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1317",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   },
   {
@@ -4487,6 +4756,7 @@ export const seedStudents: SeedStudent[] = [
     "room": "1317",
     "floor": null,
     "company": "鴻佰",
+    "active": true,
     "note": null
   }
 ];

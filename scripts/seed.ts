@@ -19,6 +19,7 @@ async function main() {
       room: s.room,
       floor: s.floor,
       company: s.company ?? null,
+      active: s.active ?? true,
       note: s.note,
     }))
   );

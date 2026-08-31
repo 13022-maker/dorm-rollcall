@@ -2,7 +2,7 @@
 
 import { useMemo, useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
-import { addStudent, updateStudent, deleteStudent, deleteStudents, type StudentInput } from './actions';
+import { addStudent, updateStudent, deleteStudent, deleteStudents, setStudentsActive, type StudentInput } from './actions';
 
 type S = {
   id: number;
@@ -15,6 +15,7 @@ type S = {
   room: string | null;
   floor: number | null;
   company: string | null;
+  active: boolean;
   note: string | null;
 };
 
@@ -28,6 +29,7 @@ const EMPTY: StudentInput = {
   room: '',
   floor: null,
   company: '',
+  active: true,
   note: '',
 };
 
@@ -43,6 +45,7 @@ function normalize(input: StudentInput): StudentInput {
     room: input.room?.trim() || null,
     floor: input.floor,
     company: input.company?.trim() || null,
+    active: input.active,
     note: input.note?.trim() || null,
   };
 }
@@ -55,6 +58,8 @@ export default function StudentsClient({ students }: { students: S[] }) {
   const [region, setRegion] = useState('');
   const [building, setBuilding] = useState('');
   const [q, setQ] = useState('');
+  // 停用中的人（目前不住宿舍）預設隱藏，避免跟真的要點名的人混在一起；要管理/恢復時再打開
+  const [showInactive, setShowInactive] = useState(false);
 
   const [adding, setAdding] = useState(false);
   const [newRow, setNewRow] = useState<StudentInput>(EMPTY);
@@ -85,10 +90,11 @@ export default function StudentsClient({ students }: { students: S[] }) {
   const filtered = useMemo(() => {
     const kw = q.trim();
     return students
+      .filter((s) => (showInactive ? true : s.active))
       .filter((s) => (region ? s.region === region : true))
       .filter((s) => (building ? s.building === building : true))
       .filter((s) => (kw ? s.name.includes(kw) || (s.room ?? '').includes(kw) || s.className.includes(kw) : true));
-  }, [students, region, building, q]);
+  }, [students, region, building, q, showInactive]);
 
   function toStudentInput(s: S): StudentInput {
     return {
@@ -101,6 +107,7 @@ export default function StudentsClient({ students }: { students: S[] }) {
       room: s.room,
       floor: s.floor,
       company: s.company,
+      active: s.active,
       note: s.note,
     };
   }
@@ -201,12 +208,34 @@ export default function StudentsClient({ students }: { students: S[] }) {
     });
   }
 
+  function doBulkSetActive(active: boolean) {
+    setError('');
+    const ids = selectedInView.map((s) => s.id);
+    start(async () => {
+      const r = await setStudentsActive(ids, active);
+      if (!r.ok) {
+        setError(r.message);
+        return;
+      }
+      setSelected((prev) => {
+        const next = new Set(prev);
+        for (const id of ids) next.delete(id);
+        return next;
+      });
+      router.refresh();
+    });
+  }
+
   return (
     <main className="wrap wide">
       <header className="head row">
         <div>
           <h1>住宿名單管理</h1>
-          <p className="sub">共 {students.length} 人 · 新增／修改／刪除會直接反映到 /report 跟看板</p>
+          <p className="sub">
+            共 {students.filter((s) => s.active).length} 人使用中
+            {students.some((s) => !s.active) && `（另有 ${students.filter((s) => !s.active).length} 人停用中）`}
+            {' '}· 新增／修改／刪除會直接反映到 /report 跟看板
+          </p>
         </div>
         <a className="btn ghost sm" href="/admin">
           回看板
@@ -237,6 +266,10 @@ export default function StudentsClient({ students }: { students: S[] }) {
           value={q}
           onChange={(e) => setQ(e.target.value)}
         />
+        <label style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 14, color: 'var(--dim)' }}>
+          <input type="checkbox" checked={showInactive} onChange={(e) => setShowInactive(e.target.checked)} />
+          顯示停用中的人
+        </label>
         <button className="btn primary sm" onClick={() => { setAdding((v) => !v); setError(''); }}>
           {adding ? '取消新增' : '＋ 新增學生'}
         </button>
@@ -266,6 +299,10 @@ export default function StudentsClient({ students }: { students: S[] }) {
             />
             <input placeholder="工讀公司（可空）" value={newRow.company ?? ''} onChange={(e) => setNewRow({ ...newRow, company: e.target.value })} />
             <input placeholder="備註（可空）" value={newRow.note ?? ''} onChange={(e) => setNewRow({ ...newRow, note: e.target.value })} />
+            <label style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              <input type="checkbox" checked={newRow.active} onChange={(e) => setNewRow({ ...newRow, active: e.target.checked })} />
+              使用中（取消勾選＝目前不住宿舍，不列入回報/統計）
+            </label>
           </div>
           <button className="btn primary sm" disabled={pending} onClick={submitAdd} style={{ marginTop: 12 }}>
             {pending ? '新增中…' : '確認新增'}
@@ -287,6 +324,8 @@ export default function StudentsClient({ students }: { students: S[] }) {
             </>
           ) : (
             <>
+              <button className="btn ghost sm" disabled={pending} onClick={() => doBulkSetActive(false)}>停用選取</button>
+              <button className="btn ghost sm" disabled={pending} onClick={() => doBulkSetActive(true)}>啟用選取</button>
               <button className="btn danger sm" onClick={() => setBulkConfirm(true)}>刪除選取</button>
               <button className="btn ghost sm" onClick={() => setSelected(new Set())}>清除選取</button>
             </>
@@ -315,6 +354,7 @@ export default function StudentsClient({ students }: { students: S[] }) {
               <th>房號</th>
               <th>樓層</th>
               <th>工讀公司</th>
+              <th>狀態</th>
               <th>備註</th>
               <th>操作</th>
             </tr>
@@ -323,7 +363,7 @@ export default function StudentsClient({ students }: { students: S[] }) {
             {filtered.map((s) => {
               const isEditing = editingId === s.id;
               return (
-                <tr key={s.id}>
+                <tr key={s.id} style={s.active ? undefined : { opacity: 0.5 }}>
                   <td>
                     <input
                       type="checkbox"
@@ -355,6 +395,12 @@ export default function StudentsClient({ students }: { students: S[] }) {
                         />
                       </td>
                       <td><input value={editRow.company ?? ''} onChange={(e) => setEditRow({ ...editRow, company: e.target.value })} /></td>
+                      <td>
+                        <select value={editRow.active ? '1' : '0'} onChange={(e) => setEditRow({ ...editRow, active: e.target.value === '1' })}>
+                          <option value="1">使用中</option>
+                          <option value="0">停用</option>
+                        </select>
+                      </td>
                       <td><input value={editRow.note ?? ''} onChange={(e) => setEditRow({ ...editRow, note: e.target.value })} /></td>
                       <td className="opcell">
                         <button className="btn primary sm" disabled={pending} onClick={() => saveEdit(s.id)}>存檔</button>
@@ -372,6 +418,13 @@ export default function StudentsClient({ students }: { students: S[] }) {
                       <td>{s.room ?? '—'}</td>
                       <td>{s.floor ?? '—'}</td>
                       <td className="dim">{s.company ?? '—'}</td>
+                      <td>
+                        {s.active ? (
+                          <span className="pill" style={{ background: '#16a34a' }}>使用中</span>
+                        ) : (
+                          <span className="pill" style={{ background: '#94a3b8' }}>停用</span>
+                        )}
+                      </td>
                       <td className="dim">{s.note ?? ''}</td>
                       <td className="opcell">
                         <button className="btn ghost sm" onClick={() => startEdit(s)}>編輯</button>
@@ -393,7 +446,7 @@ export default function StudentsClient({ students }: { students: S[] }) {
             })}
             {filtered.length === 0 && (
               <tr>
-                <td colSpan={12} className="empty">沒有符合條件的學生</td>
+                <td colSpan={13} className="empty">沒有符合條件的學生</td>
               </tr>
             )}
           </tbody>

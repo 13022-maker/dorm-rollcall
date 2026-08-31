@@ -15,6 +15,7 @@ export type StudentInput = {
   room: string | null;
   floor: number | null;
   company: string | null;
+  active: boolean;
   note: string | null;
 };
 
@@ -87,6 +88,23 @@ export async function deleteStudents(ids: number[]): Promise<ActionResult> {
   } catch (e) {
     console.error('deleteStudents failed', e);
     return { ok: false, message: '刪除失敗，請稍後再試' };
+  }
+
+  revalidatePath('/admin/students');
+  revalidatePath('/admin');
+  revalidatePath('/report');
+  return { ok: true };
+}
+
+// 批次停用/啟用多位學生（停用＝目前不住宿舍，暫時不列入任何回報頁面與統計，但資料保留）
+export async function setStudentsActive(ids: number[], active: boolean): Promise<ActionResult> {
+  if (ids.length === 0) return { ok: true };
+
+  try {
+    await db.update(students).set({ active }).where(inArray(students.id, ids));
+  } catch (e) {
+    console.error('setStudentsActive failed', e);
+    return { ok: false, message: '更新失敗，請稍後再試' };
   }
 
   revalidatePath('/admin/students');

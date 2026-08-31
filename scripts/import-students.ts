@@ -10,13 +10,14 @@ import type { SeedStudent } from '../db/students.seed';
 //
 // 用法：npm run db:import -- 檔案路徑.csv
 // CSV 第一列要是欄位名稱，順序不拘：
-//   region,building,className,studentNo,name,gender,room,floor,company,note
+//   region,building,className,studentNo,name,gender,room,floor,company,active,note
 // 其中 building / className / name 必填，其他欄位可留空。
 // region 是地區篩選用的上層分類（例：明新、萬能、啟英），一般宿舍生留空即可。
 // company 是建教合作班的工讀公司，一般宿舍生留空即可。
+// active 留空預設使用中；填 0/false/否/停用 代表目前不住宿舍，不列入回報與統計（但資料保留）。
 
 const REQUIRED = ['building', 'className', 'name'] as const;
-const COLUMNS = ['region', 'building', 'className', 'studentNo', 'name', 'gender', 'room', 'floor', 'company', 'note'] as const;
+const COLUMNS = ['region', 'building', 'className', 'studentNo', 'name', 'gender', 'room', 'floor', 'company', 'active', 'note'] as const;
 
 // 簡易 CSV 解析：支援雙引號包欄位、欄位內逗號跟換行
 export function parseCsv(text: string): string[][] {
@@ -86,6 +87,10 @@ export function toRecords(csvText: string): SeedStudent[] {
       }
     }
 
+    // active 欄位可留空（預設使用中）；填 0/false/否/停用 代表這個人目前不列入回報與統計
+    const activeRaw = get('active').toLowerCase();
+    const active = ['0', 'false', '否', '停用'].includes(activeRaw) ? false : true;
+
     return {
       region: get('region') || null,
       building: get('building'),
@@ -96,6 +101,7 @@ export function toRecords(csvText: string): SeedStudent[] {
       room: get('room') || null,
       floor,
       company: get('company') || null,
+      active,
       note: get('note') || null,
     };
   });
@@ -175,7 +181,7 @@ async function main() {
   }
 
   console.log(`開始寫入資料庫（${toInsert.length} 筆）…`);
-  await db.insert(students).values(toInsert);
+  await db.insert(students).values(toInsert.map((r) => ({ ...r, active: r.active ?? true })));
 
   console.log('同步寫入 db/students.seed.ts…');
   appendToSeedFile(toInsert);

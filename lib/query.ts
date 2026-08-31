@@ -45,6 +45,8 @@ export async function getNightRows(rollcallDate = rollcallDateFor(new Date())): 
       rollcalls,
       and(eq(rollcalls.studentId, students.id), eq(rollcalls.rollcallDate, rollcallDate))
     )
+    // 停用中的學生（目前不住宿舍）不列入看板統計與清單
+    .where(eq(students.active, true))
     .orderBy(asc(students.building), asc(students.className), asc(students.room), asc(students.name));
 
   const rows: NightRow[] = raw.map((r) => ({

@@ -3,6 +3,7 @@ import {
   serial,
   text,
   integer,
+  boolean,
   timestamp,
   date,
   unique,
@@ -21,6 +22,7 @@ export const students = pgTable('students', {
   room: text('room'), // 房號，例：1023；未分配可為 null
   floor: integer('floor'), // 樓層，男 1F、女 4/5F；無樓層資料可為 null
   company: text('company'), // 建教合作班的工讀公司，一般宿舍生可為 null
+  active: boolean('active').notNull().default(true), // false = 目前不用回報/不計入統計（人還在名單裡，只是暫時沒住宿舍，例如返校上課但實際住別區）
   note: text('note'),
 });
 
