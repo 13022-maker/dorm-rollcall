@@ -76,6 +76,14 @@ export function toRecords(csvText: string): SeedStudent[] {
     }
 
     const floorRaw = get('floor');
+    let floor: number | null = null;
+    if (floorRaw) {
+      floor = Number(floorRaw);
+      if (!Number.isFinite(floor)) {
+        throw new Error(`第 ${idx + 2} 列的「floor」不是數字：「${floorRaw}」（可以留空，但不能是文字）`);
+      }
+    }
+
     return {
       building: get('building'),
       className: get('className'),
@@ -83,7 +91,7 @@ export function toRecords(csvText: string): SeedStudent[] {
       name: get('name'),
       gender: get('gender') || null,
       room: get('room') || null,
-      floor: floorRaw ? Number(floorRaw) : null,
+      floor,
       note: get('note') || null,
     };
   });
