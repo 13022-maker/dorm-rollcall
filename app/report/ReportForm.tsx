@@ -26,7 +26,15 @@ function floorLabel(f: number | null) {
   return `${f} 樓`;
 }
 
-export default function ReportForm({ students, overdueNow }: { students: S[]; overdueNow: boolean }) {
+export default function ReportForm({
+  students,
+  overdueNow,
+  region,
+}: {
+  students: S[];
+  overdueNow: boolean;
+  region: string;
+}) {
   const [building, setBuilding] = useState('');
   const [room, setRoom] = useState('');
   const [sid, setSid] = useState<number | ''>('');
@@ -34,10 +42,13 @@ export default function ReportForm({ students, overdueNow }: { students: S[]; ov
   const [result, setResult] = useState<ReportResult | null>(null);
   const [pending, start] = useTransition();
 
+  // 每個宿舍分開記住身分（key 帶 region），避免同一支手機開不同宿舍的回報頁時互相蓋掉
+  const storageKey = `dorm_me_${region}`;
+
   // 記住上次身分，隔夜自動回到該棟該房並選好名字
   useEffect(() => {
     try {
-      const saved = localStorage.getItem('dorm_me');
+      const saved = localStorage.getItem(storageKey);
       if (saved) {
         const me = JSON.parse(saved) as { id: number };
         const s = students.find((x) => x.id === me.id);
@@ -48,7 +59,7 @@ export default function ReportForm({ students, overdueNow }: { students: S[]; ov
         }
       }
     } catch {}
-  }, [students]);
+  }, [students, storageKey]);
 
   // 該棟的房號清單，依樓層分組
   const roomsByFloor = useMemo(() => {
@@ -98,14 +109,15 @@ export default function ReportForm({ students, overdueNow }: { students: S[]; ov
     setSid(id);
     setResult(null);
     try {
-      localStorage.setItem('dorm_me', JSON.stringify({ id }));
+      localStorage.setItem(storageKey, JSON.stringify({ id }));
     } catch {}
   }
 
   function send() {
     if (!me) return;
     start(async () => {
-      const r = await submitReport(me.id, explanation);
+      // region 帶進去讓後端驗證這位學生真的屬於這個回報入口，不是單純前端過濾而已
+      const r = await submitReport(me.id, region, explanation);
       setResult(r);
       if (r.ok) setExplanation('');
     });

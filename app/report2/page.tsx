@@ -1,12 +1,12 @@
 import { getReportStudents } from '@/lib/report';
 import { needsExplanationNow, rollcallDateFor, formatRollcallDate } from '@/lib/rollcall';
-import ReportForm from './ReportForm';
+import ReportForm from '../report/ReportForm';
 
 export const dynamic = 'force-dynamic';
 
-const REGION = '明新';
+const REGION = '啟英';
 
-export default async function ReportPage() {
+export default async function Report2Page() {
   const list = await getReportStudents(REGION);
 
   const now = new Date();

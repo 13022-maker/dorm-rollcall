@@ -70,39 +70,46 @@ export default function AdminClient({
     setBuilding(''); // 換地區後樓別選項會變，先清掉避免選到不存在的組合
   }
 
-  const counts = useMemo(() => {
-    const c: Record<RowStatus, number> = { on_time: 0, late: 0, overdue: 0, unreported: 0 };
-    rows.forEach((r) => (c[r.status] += 1));
-    return c;
-  }, [rows]);
-
-  const reported = counts.on_time + counts.late + counts.overdue;
-  const pct = rows.length ? Math.round((reported / rows.length) * 100) : 0;
-
-  const filtered = useMemo(() => {
+  // 除了「狀態」以外的篩選條件（地區/樓別/班級/性別/搜尋）都先套用，
+  // 統計卡片（回報率、各狀態人數）以這個範圍為準，才會隨著選的宿舍/樓別即時連動；
+  // 「狀態」本身不套在這裡，因為卡片本來就是要顯示「這個範圍內」各狀態各有幾人。
+  const scoped = useMemo(() => {
     const kw = q.trim();
     return rows
       .filter((r) => (region ? r.region === region : true))
       .filter((r) => (building ? r.building === building : true))
       .filter((r) => (cls ? r.className === cls : true))
       .filter((r) => (gender ? r.gender === gender : true))
+      .filter((r) => (kw ? r.name.includes(kw) || (r.room ?? '').includes(kw) : true));
+  }, [rows, region, building, cls, gender, q]);
+
+  const counts = useMemo(() => {
+    const c: Record<RowStatus, number> = { on_time: 0, late: 0, overdue: 0, unreported: 0 };
+    scoped.forEach((r) => (c[r.status] += 1));
+    return c;
+  }, [scoped]);
+
+  const reported = counts.on_time + counts.late + counts.overdue;
+  const pct = scoped.length ? Math.round((reported / scoped.length) * 100) : 0;
+
+  const filtered = useMemo(() => {
+    return scoped
       .filter((r) => (status ? r.status === status : true))
-      .filter((r) => (kw ? r.name.includes(kw) || (r.room ?? '').includes(kw) : true))
       .sort(
         (a, b) =>
           STATUS_ORDER.indexOf(a.status) - STATUS_ORDER.indexOf(b.status) ||
           (a.room ?? '').localeCompare(b.room ?? '') ||
           a.name.localeCompare(b.name)
       );
-  }, [rows, region, building, cls, gender, status, q]);
+  }, [scoped, status]);
 
   return (
     <main className="wrap wide">
       <header className="head row">
         <div>
-          <h1>夜間點名看板</h1>
+          <h1>夜間點名看板{region && `・${region}`}</h1>
           <p className="sub">
-            {dateLabel} 當夜 · 共 {rows.length} 人 · 每 20 秒自動更新
+            {dateLabel} 當夜 · 共 {scoped.length} 人{scoped.length !== rows.length && `（全部 ${rows.length} 人）`} · 每 20 秒自動更新
           </p>
         </div>
         <div className="opcell">
@@ -116,7 +123,7 @@ export default function AdminClient({
       </header>
 
       <section className="stats">
-        <Stat label="回報率" value={`${pct}%`} sub={`${reported}/${rows.length}`} color="#0f172a" active={false} onClick={() => setStatus('')} />
+        <Stat label="回報率" value={`${pct}%`} sub={`${reported}/${scoped.length}`} color="#0f172a" active={false} onClick={() => setStatus('')} />
         <Stat label={STATUS_LABEL.unreported} value={counts.unreported} color={STATUS_COLOR.unreported} active={status === 'unreported'} onClick={() => setStatus(status === 'unreported' ? '' : 'unreported')} />
         <Stat label={STATUS_LABEL.overdue} value={counts.overdue} color={STATUS_COLOR.overdue} active={status === 'overdue'} onClick={() => setStatus(status === 'overdue' ? '' : 'overdue')} />
         <Stat label={STATUS_LABEL.late} value={counts.late} color={STATUS_COLOR.late} active={status === 'late'} onClick={() => setStatus(status === 'late' ? '' : 'late')} />
