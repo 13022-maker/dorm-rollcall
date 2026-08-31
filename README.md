@@ -43,9 +43,9 @@
 
 ## 名單維護
 
-名單在 `db/students.seed.ts`（142 人，已含班級 / 姓名 / 性別 / 房號 / 樓層）。異動後重跑 `npm run db:seed` 會清空重匯（連同舊回報紀錄；學期中若要保留紀錄，改用增量更新而非 seed）。
+名單在 `db/students.seed.ts`（目前 373 人：一般宿舍生 142 人 + 建教合作班 231 人，含班級 / 姓名 / 性別 / 房號 / 樓層 / 工讀公司）。異動後重跑 `npm run db:seed` 會清空重匯（連同舊回報紀錄；學期中若要保留紀錄，改用增量更新而非 seed）。
 
-**新增校舍 / 批次匯入新學生**：不用手動改 `db/students.seed.ts`，準備一份 CSV（第一列是欄位名稱，`building,className,studentNo,name,gender,room,floor,note`，`studentNo`/`gender`/`room`/`floor`/`note` 可留空），跑：
+**新增校舍 / 批次匯入新學生**：不用手動改 `db/students.seed.ts`，準備一份 CSV（第一列是欄位名稱，`building,className,studentNo,name,gender,room,floor,company,note`，除了 `building`/`className`/`name` 其他欄位都可留空；`company` 是建教合作班的工讀公司，一般宿舍生不用填），跑：
 
 ```bash
 npm run db:import -- 你的檔案.csv
