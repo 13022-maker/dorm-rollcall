@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>/report QR Code 產生器</title>
+<script src="/vendor/qrcode.js"></script>
+<style>
+  /* 畫面版型：淺色卡片，跟 /report 頁面風格一致 */
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 32px 16px;
+    background: #f4f6fb;
+    font-family: -apple-system, "PingFang TC", "Microsoft JhengHei", sans-serif;
+    color: #1a1a2e;
+  }
+  .wrap { max-width: 480px; margin: 0 auto; }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  .hint { color: #6b7280; font-size: 14px; margin: 0 0 20px; }
+  .card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.08);
+    margin-bottom: 20px;
+  }
+  label { display: block; font-size: 13px; color: #6b7280; margin-bottom: 6px; }
+  input[type="text"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 15px;
+    margin-bottom: 16px;
+  }
+  input[type="text"]:focus { outline: 2px solid #4f46e5; border-color: transparent; }
+  button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #4f46e5;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  button:hover { background: #4338ca; }
+
+  /* 可列印卡片：QR + 標題 + 網址，貼在寢室/群組用 */
+  .printable {
+    background: #fff;
+    border-radius: 16px;
+    padding: 32px 24px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,.08);
+  }
+  .printable h2 { font-size: 22px; margin: 0 0 4px; }
+  .printable .sub { color: #6b7280; font-size: 14px; margin: 0 0 20px; }
+  #qrcode svg { width: 260px; height: 260px; }
+  .printable .url {
+    margin-top: 16px;
+    font-size: 13px;
+    color: #6b7280;
+    word-break: break-all;
+  }
+
+  @media print {
+    body { background: #fff; padding: 0; }
+    .wrap { max-width: none; }
+    .card, h1, .hint { display: none; }
+    .printable { box-shadow: none; padding: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>/report QR Code 產生器</h1>
+  <p class="hint">貼上（或確認）點名網址，產生 QR Code 後直接列印，貼在寢室門口或分享到群組。</p>
+
+  <div class="card">
+    <label for="title">標題（列印時顯示）</label>
+    <input type="text" id="title" value="宿舍夜間點名回報" />
+
+    <label for="url">/report 網址</label>
+    <input type="text" id="url" placeholder="https://your-app.vercel.app/report" />
+
+    <button id="genBtn">產生 QR Code</button>
+  </div>
+
+  <div class="printable">
+    <h2 id="printTitle">宿舍夜間點名回報</h2>
+    <p class="sub">手機掃描或輸入網址回報</p>
+    <div id="qrcode"></div>
+    <p class="url" id="printUrl"></p>
+  </div>
+
+  <div class="card" style="margin-top:20px;">
+    <button id="printBtn" style="background:#111827;">列印這張 QR Code</button>
+  </div>
+</div>
+
+<script>
+  var urlInput = document.getElementById('url');
+  var titleInput = document.getElementById('title');
+  var printTitle = document.getElementById('printTitle');
+  var printUrl = document.getElementById('printUrl');
+  var qrEl = document.getElementById('qrcode');
+
+  // 開啟頁面時，預設帶入目前網域的 /report（部署後開這頁就自動對，不用手動貼）
+  urlInput.value = window.location.origin + '/report';
+
+  function render() {
+    var url = urlInput.value.trim();
+    var title = titleInput.value.trim() || '宿舍夜間點名回報';
+
+    printTitle.textContent = title;
+    printUrl.textContent = url;
+    qrEl.innerHTML = '';
+
+    if (!url) return;
+
+    // 錯誤修正等級用 M，QR Code 貼在門口偶爾髒污/反光也還能掃
+    var qr = qrcode(0, 'M');
+    qr.addData(url);
+    qr.make();
+    qrEl.innerHTML = qr.createSvgTag({ cellSize: 6, margin: 4 });
+  }
+
+  document.getElementById('genBtn').addEventListener('click', render);
+  document.getElementById('printBtn').addEventListener('click', function () {
+    window.print();
+  });
+
+  render();
+</script>
+</body>
+</html>
