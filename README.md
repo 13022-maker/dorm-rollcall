@@ -51,9 +51,14 @@
 
 ## 名單維護
 
-名單在 `db/students.seed.ts`（目前 373 人：一般宿舍生 142 人 + 建教合作班 231 人，含班級 / 姓名 / 性別 / 房號 / 樓層 / 工讀公司）。異動後重跑 `npm run db:seed` 會清空重匯（連同舊回報紀錄；學期中若要保留紀錄，改用增量更新而非 seed）。
+名單在 `db/students.seed.ts`（目前 365 筆，含班級 / 姓名 / 性別 / 房號 / 樓層 / 工讀公司；其中 60 筆是明新A棟、目前標記為停用，見下方說明）。異動後重跑 `npm run db:seed` 會清空重匯（連同舊回報紀錄；學期中若要保留紀錄，改用增量更新而非 seed）。
 
-**新增校舍 / 批次匯入新學生**：不用手動改 `db/students.seed.ts`，準備一份 CSV（第一列是欄位名稱，`building,className,studentNo,name,gender,room,floor,company,note`，除了 `building`/`className`/`name` 其他欄位都可留空；`company` 是建教合作班的工讀公司，一般宿舍生不用填），跑：
+**停用學生（active 欄位）**：學生「目前不住宿舍」但還不確定要分到哪個地區時（例如明新A棟——實際是 A班返校上課、真正住在啟英/萬能的學生），不用刪除資料，登入 `/admin` → 名單管理 → 編輯該生把「狀態」改成「停用」即可（也支援勾選多筆後按「停用選取」批次處理）。停用中的學生：
+- 不會出現在任何 `/report` 系列的選單裡（就算知道學號也送不出回報，伺服器端會擋）
+- 不計入 `/admin` 看板的任何統計數字（回報率、未回報等），也不會出現在清單裡
+- 名單管理頁預設隱藏，勾選「顯示停用的人」才看得到，方便之後確認清楚實際住哪個地區後改回「使用中」並更正棟別
+
+**新增校舍 / 批次匯入新學生**：不用手動改 `db/students.seed.ts`，準備一份 CSV（第一列是欄位名稱，`region,building,className,studentNo,name,gender,room,floor,company,active,note`，除了 `building`/`className`/`name` 其他欄位都可留空；`company` 是建教合作班的工讀公司；`active` 留空預設使用中，填 `0`/`false`/`否`/`停用` 代表這批人先不列入回報），跑：
 
 ```bash
 npm run db:import -- 你的檔案.csv
@@ -67,7 +72,7 @@ npm run db:import -- 你的檔案.csv
 
 ## 資料結構
 
-- `students`：region（地區，明新/啟英/萬能，`/report` 系列與 `/admin` 地區篩選都靠這欄）、building、className、studentNo、name、gender、room、floor、company（工讀公司）、note
+- `students`：region（地區，明新/啟英/萬能，`/report` 系列與 `/admin` 地區篩選都靠這欄）、building、className、studentNo、name、gender、room、floor、company（工讀公司）、active（是否計入回報/統計，預設 true）、note
 - `rollcalls`：studentId、rollcallDate（點名夜）、reportedAt、status、explanation。`(studentId, rollcallDate)` 唯一，重複回報覆蓋為最新。
 
 ## 可延伸
