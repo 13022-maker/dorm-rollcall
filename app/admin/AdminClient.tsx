@@ -88,9 +88,14 @@ export default function AdminClient({
             {dateLabel} 當夜 · 共 {rows.length} 人 · 每 20 秒自動更新
           </p>
         </div>
-        <a className="btn ghost sm" href={`/admin/export?date=${rollcallDate}`}>
-          匯出 CSV
-        </a>
+        <div className="opcell">
+          <a className="btn ghost sm" href="/admin/students">
+            名單管理
+          </a>
+          <a className="btn ghost sm" href={`/admin/export?date=${rollcallDate}`}>
+            匯出 CSV
+          </a>
+        </div>
       </header>
 
       <section className="stats">
