@@ -51,9 +51,9 @@ select:focus, input:focus, textarea:focus { outline: 2px solid var(--brand); bor
 textarea { resize: vertical; }
 
 /* 棟別分段按鈕 */
-.seg { display: flex; gap: 8px; }
+.seg { display: flex; flex-wrap: wrap; gap: 8px; }
 .seg-btn {
-  flex: 1; padding: 14px; font-size: 16px; font-weight: 600; cursor: pointer;
+  flex: 1; min-width: 72px; padding: 14px; font-size: 16px; font-weight: 600; cursor: pointer;
   border: 1px solid var(--line); border-radius: 12px; background: #fff; color: var(--ink);
   font-family: inherit;
 }

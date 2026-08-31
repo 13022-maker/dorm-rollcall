@@ -51,6 +51,7 @@ export default function AdminClient({
     return () => clearInterval(t);
   }, [router]);
 
+  const buildings = useMemo(() => Array.from(new Set(rows.map((r) => r.building))).sort(), [rows]);
   const classes = useMemo(() => Array.from(new Set(rows.map((r) => r.className))), [rows]);
 
   const counts = useMemo(() => {
@@ -103,8 +104,11 @@ export default function AdminClient({
       <section className="filters">
         <select value={building} onChange={(e) => setBuilding(e.target.value)}>
           <option value="">全部樓別</option>
-          <option value="A">A 棟</option>
-          <option value="B">B 棟</option>
+          {buildings.map((b) => (
+            <option key={b} value={b}>
+              {b} 棟
+            </option>
+          ))}
         </select>
         <select value={cls} onChange={(e) => setCls(e.target.value)}>
           <option value="">全部班級</option>

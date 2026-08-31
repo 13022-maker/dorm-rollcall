@@ -1,6 +1,6 @@
 // 由住宿名單自動產生（142 人）。日後名單異動改這裡再重跑 seed。
 export type SeedStudent = {
-  building: 'A' | 'B';
+  building: string; // 棟別代號，例：'A'、'B'、'C'…
   className: string;
   studentNo: string | null;
   name: string;

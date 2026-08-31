@@ -45,6 +45,14 @@
 
 名單在 `db/students.seed.ts`（142 人，已含班級 / 姓名 / 性別 / 房號 / 樓層）。異動後重跑 `npm run db:seed` 會清空重匯（連同舊回報紀錄；學期中若要保留紀錄，改用增量更新而非 seed）。
 
+**新增校舍 / 批次匯入新學生**：不用手動改 `db/students.seed.ts`，準備一份 CSV（第一列是欄位名稱，`building,className,studentNo,name,gender,room,floor,note`，`studentNo`/`gender`/`room`/`floor`/`note` 可留空），跑：
+
+```bash
+npm run db:import -- 你的檔案.csv
+```
+
+會直接新增進資料庫（不會清空既有名單跟回報紀錄），同時自動同步寫回 `db/students.seed.ts`。樓別（`/report` 選單、`/admin` 篩選）是從資料庫現有資料自動產生，不用改程式碼，新增任何棟別代號都會自動出現。
+
 ## 資料結構
 
 - `students`：building、className、studentNo、name、gender、room、floor、note

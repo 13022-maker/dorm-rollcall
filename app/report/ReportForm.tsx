@@ -77,6 +77,12 @@ export default function ReportForm({ students, overdueNow }: { students: S[]; ov
 
   const me = students.find((s) => s.id === sid);
 
+  // 樓別清單直接從名單資料算出來，新增校舍不用改這支程式
+  const buildings = useMemo(
+    () => Array.from(new Set(students.map((s) => s.building))).sort(),
+    [students]
+  );
+
   function chooseBuilding(b: string) {
     setBuilding(b);
     setRoom('');
@@ -130,7 +136,7 @@ export default function ReportForm({ students, overdueNow }: { students: S[]; ov
       <div className="field">
         <span>樓別</span>
         <div className="seg">
-          {['A', 'B'].map((b) => (
+          {buildings.map((b) => (
             <button
               key={b}
               className={`seg-btn${building === b ? ' on' : ''}`}
