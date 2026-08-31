@@ -53,6 +53,10 @@ npm run db:import -- 你的檔案.csv
 
 會直接新增進資料庫（不會清空既有名單跟回報紀錄），同時自動同步寫回 `db/students.seed.ts`。樓別（`/report` 選單、`/admin` 篩選）是從資料庫現有資料自動產生，不用改程式碼，新增任何棟別代號都會自動出現。
 
+會自動檢查重複（同棟別 + 房號 + 姓名視為同一人），已存在的列會被跳過並印出來，不會寫入兩筆一樣的資料，CSV 也可以重複跑不用擔心。
+
+**新增／修改／刪除單一學生**：不想用 CSV 的話，登入 `/admin` 後點右上角「名單管理」（`/admin/students`），可以直接在網頁上新增、編輯、刪除，改動即時生效。
+
 ## 資料結構
 
 - `students`：building、className、studentNo、name、gender、room、floor、note
