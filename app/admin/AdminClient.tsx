@@ -27,16 +27,27 @@ type Row = {
 
 const STATUS_ORDER: RowStatus[] = ['unreported', 'overdue', 'late', 'on_time'];
 
+// 給日期字串（YYYY-MM-DD）加減幾天，回傳一樣格式的字串
+function shiftDate(dateStr: string, days: number): string {
+  const [y, m, d] = dateStr.split('-').map(Number);
+  const dt = new Date(Date.UTC(y, m - 1, d));
+  dt.setUTCDate(dt.getUTCDate() + days);
+  return dt.toISOString().slice(0, 10);
+}
+
 export default function AdminClient({
   rollcallDate,
   dateLabel,
+  today,
   rows,
 }: {
   rollcallDate: string;
   dateLabel: string;
+  today: string;
   rows: Row[];
 }) {
   const router = useRouter();
+  const isToday = rollcallDate === today;
   const [region, setRegion] = useState('');
   const [building, setBuilding] = useState('');
   const [cls, setCls] = useState('');
@@ -45,14 +56,19 @@ export default function AdminClient({
   const [q, setQ] = useState('');
   const [tick, setTick] = useState(0);
 
-  // 每 20 秒自動刷新伺服器資料
+  function goToDate(date: string) {
+    router.push(date === today ? '/admin' : `/admin?date=${date}`);
+  }
+
+  // 只有看「今晚」才需要每 20 秒自動刷新；查過去的夜晚資料不會再變，刷新只是浪費
   useEffect(() => {
+    if (!isToday) return;
     const t = setInterval(() => {
       router.refresh();
       setTick((n) => n + 1);
     }, 20_000);
     return () => clearInterval(t);
-  }, [router]);
+  }, [router, isToday]);
 
   const regions = useMemo(
     () => Array.from(new Set(rows.map((r) => r.region).filter((v): v is string => !!v))).sort(),
@@ -109,7 +125,8 @@ export default function AdminClient({
         <div>
           <h1>夜間點名看板{region && `・${region}`}</h1>
           <p className="sub">
-            {dateLabel} 當夜 · 共 {scoped.length} 人{scoped.length !== rows.length && `（全部 ${rows.length} 人）`} · 每 20 秒自動更新
+            {dateLabel} 當夜{!isToday && '（非今晚）'} · 共 {scoped.length} 人{scoped.length !== rows.length && `（全部 ${rows.length} 人）`}
+            {isToday && ' · 每 20 秒自動更新'}
           </p>
         </div>
         <div className="opcell">
@@ -121,6 +138,26 @@ export default function AdminClient({
           </a>
         </div>
       </header>
+
+      <section className="opcell" style={{ marginBottom: 16 }}>
+        <button className="btn ghost sm" onClick={() => goToDate(shiftDate(rollcallDate, -1))}>
+          ‹ 前一夜
+        </button>
+        <input
+          type="date"
+          value={rollcallDate}
+          max={today}
+          onChange={(e) => e.target.value && goToDate(e.target.value)}
+        />
+        <button className="btn ghost sm" disabled={isToday} onClick={() => goToDate(shiftDate(rollcallDate, 1))}>
+          後一夜 ›
+        </button>
+        {!isToday && (
+          <button className="btn ghost sm" onClick={() => goToDate(today)}>
+            回今晚
+          </button>
+        )}
+      </section>
 
       <section className="stats">
         <Stat label="回報率" value={`${pct}%`} sub={`${reported}/${scoped.length}`} color="#0f172a" active={false} onClick={() => setStatus('')} />
