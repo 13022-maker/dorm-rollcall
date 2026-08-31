@@ -13,6 +13,7 @@ export type StudentInput = {
   gender: string | null;
   room: string | null;
   floor: number | null;
+  company: string | null;
   note: string | null;
 };
 

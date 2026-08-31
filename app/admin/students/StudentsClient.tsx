@@ -13,6 +13,7 @@ type S = {
   gender: string | null;
   room: string | null;
   floor: number | null;
+  company: string | null;
   note: string | null;
 };
 
@@ -24,6 +25,7 @@ const EMPTY: StudentInput = {
   gender: '',
   room: '',
   floor: null,
+  company: '',
   note: '',
 };
 
@@ -37,6 +39,7 @@ function normalize(input: StudentInput): StudentInput {
     gender: input.gender?.trim() || null,
     room: input.room?.trim() || null,
     floor: input.floor,
+    company: input.company?.trim() || null,
     note: input.note?.trim() || null,
   };
 }
@@ -75,6 +78,7 @@ export default function StudentsClient({ students }: { students: S[] }) {
       gender: s.gender,
       room: s.room,
       floor: s.floor,
+      company: s.company,
       note: s.note,
     };
   }
@@ -183,6 +187,7 @@ export default function StudentsClient({ students }: { students: S[] }) {
               value={newRow.floor ?? ''}
               onChange={(e) => setNewRow({ ...newRow, floor: e.target.value ? Number(e.target.value) : null })}
             />
+            <input placeholder="工讀公司（可空）" value={newRow.company ?? ''} onChange={(e) => setNewRow({ ...newRow, company: e.target.value })} />
             <input placeholder="備註（可空）" value={newRow.note ?? ''} onChange={(e) => setNewRow({ ...newRow, note: e.target.value })} />
           </div>
           <button className="btn primary sm" disabled={pending} onClick={submitAdd} style={{ marginTop: 12 }}>
@@ -204,6 +209,7 @@ export default function StudentsClient({ students }: { students: S[] }) {
               <th>性別</th>
               <th>房號</th>
               <th>樓層</th>
+              <th>工讀公司</th>
               <th>備註</th>
               <th>操作</th>
             </tr>
@@ -234,6 +240,7 @@ export default function StudentsClient({ students }: { students: S[] }) {
                           onChange={(e) => setEditRow({ ...editRow, floor: e.target.value ? Number(e.target.value) : null })}
                         />
                       </td>
+                      <td><input value={editRow.company ?? ''} onChange={(e) => setEditRow({ ...editRow, company: e.target.value })} /></td>
                       <td><input value={editRow.note ?? ''} onChange={(e) => setEditRow({ ...editRow, note: e.target.value })} /></td>
                       <td className="opcell">
                         <button className="btn primary sm" disabled={pending} onClick={() => saveEdit(s.id)}>存檔</button>
@@ -249,6 +256,7 @@ export default function StudentsClient({ students }: { students: S[] }) {
                       <td>{s.gender ?? '—'}</td>
                       <td>{s.room ?? '—'}</td>
                       <td>{s.floor ?? '—'}</td>
+                      <td className="dim">{s.company ?? '—'}</td>
                       <td className="dim">{s.note ?? ''}</td>
                       <td className="opcell">
                         <button className="btn ghost sm" onClick={() => startEdit(s)}>編輯</button>
@@ -270,7 +278,7 @@ export default function StudentsClient({ students }: { students: S[] }) {
             })}
             {filtered.length === 0 && (
               <tr>
-                <td colSpan={9} className="empty">沒有符合條件的學生</td>
+                <td colSpan={10} className="empty">沒有符合條件的學生</td>
               </tr>
             )}
           </tbody>

@@ -12,6 +12,7 @@ export type NightRow = {
   gender: string | null;
   room: string | null;
   floor: number | null;
+  company: string | null;
   status: RowStatus;
   reportedAt: Date | null;
   explanation: string | null;
@@ -32,6 +33,7 @@ export async function getNightRows(rollcallDate = rollcallDateFor(new Date())): 
       gender: students.gender,
       room: students.room,
       floor: students.floor,
+      company: students.company,
       status: rollcalls.status,
       reportedAt: rollcalls.reportedAt,
       explanation: rollcalls.explanation,
@@ -52,6 +54,7 @@ export async function getNightRows(rollcallDate = rollcallDateFor(new Date())): 
     gender: r.gender,
     room: r.room,
     floor: r.floor,
+    company: r.company,
     status: (r.status as RowStatus) ?? 'unreported',
     reportedAt: r.reportedAt ?? null,
     explanation: r.explanation ?? null,

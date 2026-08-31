@@ -12,13 +12,14 @@ import {
 // 住宿學生名單
 export const students = pgTable('students', {
   id: serial('id').primaryKey(),
-  building: text('building').notNull(), // 'A' | 'B'
+  building: text('building').notNull(), // 棟別/宿舍分區，例：'A'、'B'，或建教合作班的合作學校名稱
   className: text('class_name').notNull(), // 例：僑資一甲B
   studentNo: text('student_no'), // 部分班級無學號，可為 null
   name: text('name').notNull(),
   gender: text('gender'), // 男 / 女
   room: text('room'), // 房號，例：1023；未分配可為 null
-  floor: integer('floor'), // 樓層，男 1F、女 4/5F
+  floor: integer('floor'), // 樓層，男 1F、女 4/5F；無樓層資料可為 null
+  company: text('company'), // 建教合作班的工讀公司，一般宿舍生可為 null
   note: text('note'),
 });
 

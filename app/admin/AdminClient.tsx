@@ -18,6 +18,7 @@ type Row = {
   gender: string | null;
   room: string | null;
   floor: number | null;
+  company: string | null;
   status: RowStatus;
   reportedAt: string | null;
   explanation: string | null;
@@ -151,6 +152,7 @@ export default function AdminClient({
               <th>姓名</th>
               <th>班級</th>
               <th>性別</th>
+              <th>工讀公司</th>
               <th>回報時間</th>
               <th>逾時說明</th>
             </tr>
@@ -167,6 +169,7 @@ export default function AdminClient({
                 <td className="nm">{r.name}</td>
                 <td className="dim">{r.className}</td>
                 <td>{r.gender ?? '—'}</td>
+                <td className="dim">{r.company ?? '—'}</td>
                 <td className="dim">
                   {r.reportedAt ? formatTaipeiTime(new Date(r.reportedAt), rollcallDate) : '—'}
                 </td>
@@ -175,7 +178,7 @@ export default function AdminClient({
             ))}
             {filtered.length === 0 && (
               <tr>
-                <td colSpan={7} className="empty">沒有符合條件的學生</td>
+                <td colSpan={8} className="empty">沒有符合條件的學生</td>
               </tr>
             )}
           </tbody>

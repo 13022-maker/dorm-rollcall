@@ -17,6 +17,7 @@ async function main() {
       gender: s.gender,
       room: s.room,
       floor: s.floor,
+      company: s.company ?? null,
       note: s.note,
     }))
   );
