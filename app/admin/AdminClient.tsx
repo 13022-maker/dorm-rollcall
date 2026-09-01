@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState, useEffect } from 'react';
+import { Fragment, useMemo, useState, useEffect, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 import {
   STATUS_LABEL,
@@ -8,6 +8,14 @@ import {
   formatTaipeiTime,
   type RowStatus,
 } from '@/lib/rollcall';
+import {
+  ISSUE_TYPE_LABEL,
+  ISSUE_TYPE_ICON,
+  ISSUE_STATUS_LABEL,
+  type IssueType,
+  type IssueStatus,
+} from '@/lib/issues';
+import { resetRollcall, updateIssueStatus } from './actions';
 
 type Row = {
   id: number;
@@ -25,7 +33,19 @@ type Row = {
   explanation: string | null;
 };
 
+type Issue = {
+  id: number;
+  studentId: number;
+  reportType: IssueType;
+  maintenanceItem: string | null;
+  issueDescription: string | null;
+  contactPhone: string | null;
+  status: IssueStatus;
+  createdAt: string;
+};
+
 const STATUS_ORDER: RowStatus[] = ['unreported', 'overdue', 'late', 'on_time'];
+const ISSUE_STATUS_ORDER: IssueStatus[] = ['PENDING', 'IN_PROGRESS', 'RESOLVED'];
 
 // 給日期字串（YYYY-MM-DD）加減幾天，回傳一樣格式的字串
 function shiftDate(dateStr: string, days: number): string {
@@ -40,11 +60,13 @@ export default function AdminClient({
   dateLabel,
   today,
   rows,
+  issuesByStudent,
 }: {
   rollcallDate: string;
   dateLabel: string;
   today: string;
   rows: Row[];
+  issuesByStudent: Record<number, Issue[]>;
 }) {
   const router = useRouter();
   const isToday = rollcallDate === today;
@@ -55,6 +77,40 @@ export default function AdminClient({
   const [status, setStatus] = useState<RowStatus | ''>('');
   const [q, setQ] = useState('');
   const [tick, setTick] = useState(0);
+  const [expanded, setExpanded] = useState<number | null>(null); // 展開中的學生 id（報修詳情）
+  const [confirmUnlockId, setConfirmUnlockId] = useState<number | null>(null);
+  const [opError, setOpError] = useState('');
+  const [pending, start] = useTransition();
+
+  function toggleExpand(studentId: number) {
+    setExpanded((cur) => (cur === studentId ? null : studentId));
+  }
+
+  // 舍監解鎖：刪掉今晚這筆點名紀錄，讓學生可以在 /report 系列重新回報
+  function unlock(studentId: number) {
+    setOpError('');
+    start(async () => {
+      const r = await resetRollcall(studentId, rollcallDate);
+      if (!r.ok) {
+        setOpError(r.message);
+        return;
+      }
+      setConfirmUnlockId(null);
+      router.refresh();
+    });
+  }
+
+  function setIssueStatus(issueId: number, next: IssueStatus) {
+    setOpError('');
+    start(async () => {
+      const r = await updateIssueStatus(issueId, next);
+      if (!r.ok) {
+        setOpError(r.message);
+        return;
+      }
+      router.refresh();
+    });
+  }
 
   function goToDate(date: string) {
     router.push(date === today ? '/admin' : `/admin?date=${date}`);
@@ -212,6 +268,7 @@ export default function AdminClient({
       </section>
 
       <p className="count">符合 {filtered.length} 人</p>
+      {opError && <p className="err">{opError}</p>}
 
       <div className="tablewrap">
         <table>
@@ -225,30 +282,96 @@ export default function AdminClient({
               <th>工讀公司</th>
               <th>回報時間</th>
               <th>逾時說明</th>
+              <th>報修/鑰匙</th>
+              <th>操作</th>
             </tr>
           </thead>
           <tbody>
-            {filtered.map((r) => (
-              <tr key={r.id}>
-                <td>
-                  <span className="pill" style={{ background: STATUS_COLOR[r.status] }}>
-                    {STATUS_LABEL[r.status]}
-                  </span>
-                </td>
-                <td>{r.room ?? '—'}</td>
-                <td className="nm">{r.name}</td>
-                <td className="dim">{r.className}</td>
-                <td>{r.gender ?? '—'}</td>
-                <td className="dim">{r.company ?? '—'}</td>
-                <td className="dim">
-                  {r.reportedAt ? formatTaipeiTime(new Date(r.reportedAt), rollcallDate) : '—'}
-                </td>
-                <td className="exp">{r.explanation ?? ''}</td>
-              </tr>
-            ))}
+            {filtered.map((r) => {
+              const issues = issuesByStudent[r.id] ?? [];
+              const isExpanded = expanded === r.id;
+              return (
+                <Fragment key={r.id}>
+                  <tr>
+                    <td>
+                      <span className="pill" style={{ background: STATUS_COLOR[r.status] }}>
+                        {STATUS_LABEL[r.status]}
+                      </span>
+                    </td>
+                    <td>{r.room ?? '—'}</td>
+                    <td className="nm">{r.name}</td>
+                    <td className="dim">{r.className}</td>
+                    <td>{r.gender ?? '—'}</td>
+                    <td className="dim">{r.company ?? '—'}</td>
+                    <td className="dim">
+                      {r.reportedAt ? formatTaipeiTime(new Date(r.reportedAt), rollcallDate) : '—'}
+                    </td>
+                    <td className="exp">{r.explanation ?? ''}</td>
+                    <td>
+                      {issues.length > 0 ? (
+                        <button className="icon-badges" onClick={() => toggleExpand(r.id)} title="點擊查看詳情">
+                          {Array.from(new Set(issues.map((i) => i.reportType))).map((t) => (
+                            <span key={t}>{ISSUE_TYPE_ICON[t]}</span>
+                          ))}
+                        </button>
+                      ) : (
+                        '—'
+                      )}
+                    </td>
+                    <td className="opcell">
+                      {isToday && r.status !== 'unreported' && (
+                        confirmUnlockId === r.id ? (
+                          <>
+                            <button className="btn danger sm" disabled={pending} onClick={() => unlock(r.id)}>
+                              確定解鎖
+                            </button>
+                            <button className="btn ghost sm" onClick={() => setConfirmUnlockId(null)}>取消</button>
+                          </>
+                        ) : (
+                          <button className="btn ghost sm" onClick={() => setConfirmUnlockId(r.id)}>
+                            解鎖重填
+                          </button>
+                        )
+                      )}
+                    </td>
+                  </tr>
+                  {isExpanded && issues.length > 0 && (
+                    <tr className="issue-detail-row">
+                      <td colSpan={10}>
+                        <div className="issue-list">
+                          {issues.map((i) => (
+                            <div className="issue-item" key={i.id}>
+                              <div className="issue-item-head">
+                                <span>{ISSUE_TYPE_ICON[i.reportType]} {ISSUE_TYPE_LABEL[i.reportType]}</span>
+                                {i.maintenanceItem && <span className="dim">・{i.maintenanceItem}</span>}
+                                <span className="dim">・{formatTaipeiTime(new Date(i.createdAt))}</span>
+                              </div>
+                              <p className="issue-item-desc">{i.issueDescription}</p>
+                              {i.contactPhone && <p className="dim">聯絡方式：{i.contactPhone}</p>}
+                              <div className="opcell">
+                                {ISSUE_STATUS_ORDER.map((st) => (
+                                  <button
+                                    key={st}
+                                    className={`btn sm ${i.status === st ? 'primary' : 'ghost'}`}
+                                    disabled={pending}
+                                    onClick={() => setIssueStatus(i.id, st)}
+                                  >
+                                    {ISSUE_STATUS_LABEL[st]}
+                                  </button>
+                                ))}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </td>
+                    </tr>
+                  )}
+                </Fragment>
+              );
+            })}
             {filtered.length === 0 && (
               <tr>
-                <td colSpan={8} className="empty">沒有符合條件的學生</td>
+                <td colSpan={10} className="empty">沒有符合條件的學生</td>
               </tr>
             )}
           </tbody>

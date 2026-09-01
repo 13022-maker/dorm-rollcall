@@ -17,6 +17,18 @@
 
 凌晨補報（00:00–11:59）會自動歸到「前一夜」的點名。時間線（23:00 / 24:00）集中在 `lib/rollcall.ts` 的 `ONTIME_DEADLINE_MIN`、`LATE_DEADLINE_MIN`，要改只動這兩個常數。時區固定 UTC+8，不受伺服器時區影響。
 
+**已回報鎖定**：同一位學生同一夜只能成功回報一次，回報成功後畫面會鎖定（顯示「已於 HH:mm 完成回報」），伺服器端也會擋下第二次送出（不會被覆蓋），避免手滑重按或別人誤點。填錯了要修改，只能由舍監在 `/admin` 看板對該學生按「解鎖重填」（會刪掉那筆紀錄，讓學生可以重新回報）。選房號、選姓名時也會即時顯示同寢室友的簽到狀態（顏色 + 時間），一眼看出誰簽到了、誰還沒。
+
+## 報修／鑰匙房卡問題回報
+
+`/report` 系列表單頂端有「回報類型」分頁，除了預設的例行夜間點名，還可以回報：
+
+- **房間物品報修**：冷氣／電燈／水龍頭／馬桶／書桌／門窗等，填損壞位置與狀況說明
+- **鑰匙／房卡問題**：遺失／損壞／反鎖／要求補發，填補充說明
+- **其他特殊狀況**：自由填寫狀況說明
+
+三種都可以留聯絡電話或 Line ID 方便後續聯繫，送出不受點名鎖定影響（一晚可以送多筆）。資料存在獨立的 `issue_reports` 表（`lib/issuesQuery.ts` 查詢、`app/report/issueActions.ts` 送出）。`/admin` 看板名單旁會顯示 🔧（報修）／🔑（鑰匙房卡）／❗（其他）icon，點擊展開可看詳細內容與聯絡方式，並直接切換處理進度（待處理／處理中／已結案）。
+
 ## 入口
 
 - **學生（依宿舍分開，避免填錯校區）**：
@@ -73,7 +85,8 @@ npm run db:import -- 你的檔案.csv
 ## 資料結構
 
 - `students`：region（地區，明新/啟英/萬能，`/report` 系列與 `/admin` 地區篩選都靠這欄）、building、className、studentNo、name、gender、room、floor、company（工讀公司）、active（是否計入回報/統計，預設 true）、note
-- `rollcalls`：studentId、rollcallDate（點名夜）、reportedAt、status、explanation。`(studentId, rollcallDate)` 唯一，重複回報覆蓋為最新。
+- `rollcalls`：studentId、rollcallDate（點名夜）、reportedAt、status、explanation。`(studentId, rollcallDate)` 唯一，重複回報會被擋下（不覆蓋），要改只能舍監解鎖後重填。
+- `issue_reports`：studentId、reportType（MAINTENANCE / KEY_CARD_ISSUE / OTHER）、maintenanceItem（報修項目或鑰匙問題類型）、issueDescription（詳細說明）、contactPhone、status（PENDING / IN_PROGRESS / RESOLVED，預設 PENDING）、createdAt、updatedAt。一位學生可以有多筆，不像 rollcalls 一夜只能一筆。
 
 ## 可延伸
 

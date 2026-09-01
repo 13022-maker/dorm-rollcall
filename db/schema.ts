@@ -47,5 +47,30 @@ export const rollcalls = pgTable(
   })
 );
 
+// 房間物品報修／鑰匙房卡問題／其他特殊狀況回報
+// 獨立成一張表（不塞進 rollcalls）：一位學生一晚可能報多筆（例如冷氣壞了又剛好卡片消磁），
+// 不像點名是「一人一夜一筆」。
+export const issueReports = pgTable(
+  'issue_reports',
+  {
+    id: serial('id').primaryKey(),
+    studentId: integer('student_id')
+      .notNull()
+      .references(() => students.id, { onDelete: 'cascade' }),
+    reportType: text('report_type').notNull(), // MAINTENANCE | KEY_CARD_ISSUE | OTHER
+    maintenanceItem: text('maintenance_item'), // 報修項目或鑰匙問題類型，例：冷氣、遺失
+    issueDescription: text('issue_description'), // 詳細說明
+    contactPhone: text('contact_phone'), // 聯絡電話 / Line ID
+    status: text('status').notNull().default('PENDING'), // PENDING | IN_PROGRESS | RESOLVED
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => ({
+    idxStudent: index('idx_issue_student').on(t.studentId),
+    idxStatus: index('idx_issue_status').on(t.status),
+  })
+);
+
 export type Student = typeof students.$inferSelect;
 export type Rollcall = typeof rollcalls.$inferSelect;
+export type IssueReport = typeof issueReports.$inferSelect;

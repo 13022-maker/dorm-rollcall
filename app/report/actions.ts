@@ -2,12 +2,16 @@
 
 import { db } from '@/db';
 import { rollcalls, students } from '@/db/schema';
-import { eq } from 'drizzle-orm';
-import { classify, STATUS_LABEL, formatTaipeiTime } from '@/lib/rollcall';
+import { and, eq } from 'drizzle-orm';
+import { classify, STATUS_LABEL, formatTaipeiTime, type RollStatus } from '@/lib/rollcall';
 
 export type ReportResult =
-  | { ok: true; status: 'on_time' | 'late' | 'overdue'; label: string; time: string; rollcallDate: string }
-  | { ok: false; error: 'NEED_EXPLANATION' | 'INVALID' | 'SERVER'; message: string };
+  | { ok: true; status: RollStatus; label: string; time: string; rollcallDate: string }
+  | {
+      ok: false;
+      error: 'NEED_EXPLANATION' | 'INVALID' | 'SERVER' | 'ALREADY_REPORTED';
+      message: string;
+    };
 
 export async function submitReport(
   studentId: number,
@@ -42,13 +46,29 @@ export async function submitReport(
   }
 
   try {
-    await db
+    // 已回報過的鎖定在這裡：用 onConflictDoNothing 取代原本的覆蓋寫入（onConflictDoUpdate），
+    // 已存在當夜紀錄時不插入、也不修改，回傳空陣列，避免被別人（或自己誤按）重複送出蓋掉。
+    const inserted = await db
       .insert(rollcalls)
       .values({ studentId, rollcallDate, reportedAt: now, status, explanation: reason })
-      .onConflictDoUpdate({
-        target: [rollcalls.studentId, rollcalls.rollcallDate],
-        set: { reportedAt: now, status, explanation: reason },
-      });
+      .onConflictDoNothing({ target: [rollcalls.studentId, rollcalls.rollcallDate] })
+      .returning({ reportedAt: rollcalls.reportedAt });
+
+    if (inserted.length === 0) {
+      // 撞到既有紀錄：查出來已回報的時間與狀態，告知學生，不覆蓋
+      const [existing] = await db
+        .select({ status: rollcalls.status, reportedAt: rollcalls.reportedAt })
+        .from(rollcalls)
+        .where(and(eq(rollcalls.studentId, studentId), eq(rollcalls.rollcallDate, rollcallDate)))
+        .limit(1);
+      const exStatus = (existing?.status as RollStatus) ?? status;
+      const exTime = existing?.reportedAt ? formatTaipeiTime(existing.reportedAt, rollcallDate) : '';
+      return {
+        ok: false,
+        error: 'ALREADY_REPORTED',
+        message: `你今晚已於 ${exTime} 完成回報（${STATUS_LABEL[exStatus]}），如需修改請聯絡舍監`,
+      };
+    }
   } catch (e) {
     console.error('submitReport failed', e);
     return { ok: false, error: 'SERVER', message: '系統忙碌，請稍後再試一次' };
