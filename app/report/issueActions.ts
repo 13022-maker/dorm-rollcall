@@ -22,7 +22,7 @@ export async function submitIssueReport(input: {
   if (!Number.isInteger(studentId) || studentId <= 0) {
     return { ok: false, message: '請先選擇你的姓名' };
   }
-  if (!['MAINTENANCE', 'KEY_CARD_ISSUE', 'OTHER'].includes(reportType)) {
+  if (!['MAINTENANCE', 'KEY_ISSUE', 'CARD_ISSUE', 'OTHER'].includes(reportType)) {
     return { ok: false, message: '回報類型錯誤' };
   }
   if (!issueDescription.trim()) {

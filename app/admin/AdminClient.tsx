@@ -75,6 +75,7 @@ export default function AdminClient({
   const [cls, setCls] = useState('');
   const [gender, setGender] = useState('');
   const [status, setStatus] = useState<RowStatus | ''>('');
+  const [issueOnly, setIssueOnly] = useState(false); // 只看有未結案報修/鑰匙房卡問題的人
   const [q, setQ] = useState('');
   const [tick, setTick] = useState(0);
   const [expanded, setExpanded] = useState<number | null>(null); // 展開中的學生 id（報修詳情）
@@ -164,16 +165,23 @@ export default function AdminClient({
   const reported = counts.on_time + counts.late + counts.overdue;
   const pct = scoped.length ? Math.round((reported / scoped.length) * 100) : 0;
 
+  // 這個範圍內有未結案報修/鑰匙房卡問題的人數
+  const issueCount = useMemo(
+    () => scoped.filter((r) => (issuesByStudent[r.id] ?? []).length > 0).length,
+    [scoped, issuesByStudent]
+  );
+
   const filtered = useMemo(() => {
     return scoped
       .filter((r) => (status ? r.status === status : true))
+      .filter((r) => (issueOnly ? (issuesByStudent[r.id] ?? []).length > 0 : true))
       .sort(
         (a, b) =>
           STATUS_ORDER.indexOf(a.status) - STATUS_ORDER.indexOf(b.status) ||
           (a.room ?? '').localeCompare(b.room ?? '') ||
           a.name.localeCompare(b.name)
       );
-  }, [scoped, status]);
+  }, [scoped, status, issueOnly, issuesByStudent]);
 
   return (
     <main className="wrap wide">
@@ -221,6 +229,7 @@ export default function AdminClient({
         <Stat label={STATUS_LABEL.overdue} value={counts.overdue} color={STATUS_COLOR.overdue} active={status === 'overdue'} onClick={() => setStatus(status === 'overdue' ? '' : 'overdue')} />
         <Stat label={STATUS_LABEL.late} value={counts.late} color={STATUS_COLOR.late} active={status === 'late'} onClick={() => setStatus(status === 'late' ? '' : 'late')} />
         <Stat label={STATUS_LABEL.on_time} value={counts.on_time} color={STATUS_COLOR.on_time} active={status === 'on_time'} onClick={() => setStatus(status === 'on_time' ? '' : 'on_time')} />
+        <Stat label="報修中" value={issueCount} color="#7c3aed" active={issueOnly} onClick={() => setIssueOnly((v) => !v)} />
       </section>
 
       <section className="filters">
@@ -260,8 +269,8 @@ export default function AdminClient({
           value={q}
           onChange={(e) => setQ(e.target.value)}
         />
-        {(region || building || cls || gender || status || q) && (
-          <button className="btn ghost sm" onClick={() => { setRegion(''); setBuilding(''); setCls(''); setGender(''); setStatus(''); setQ(''); }}>
+        {(region || building || cls || gender || status || issueOnly || q) && (
+          <button className="btn ghost sm" onClick={() => { setRegion(''); setBuilding(''); setCls(''); setGender(''); setStatus(''); setIssueOnly(false); setQ(''); }}>
             清除
           </button>
         )}

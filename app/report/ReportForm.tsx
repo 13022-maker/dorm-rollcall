@@ -6,7 +6,8 @@ import { submitIssueReport, type IssueSubmitResult } from './issueActions';
 import {
   ISSUE_TYPE_LABEL,
   MAINTENANCE_ITEMS,
-  KEY_CARD_ITEMS,
+  KEY_ITEMS,
+  CARD_ITEMS,
   type IssueType,
 } from '@/lib/issues';
 import { STATUS_LABEL, STATUS_COLOR, formatTaipeiTime, type RowStatus } from '@/lib/rollcall';
@@ -36,7 +37,8 @@ type ReportTab = 'ROLLCALL' | IssueType;
 const TABS: { key: ReportTab; label: string }[] = [
   { key: 'ROLLCALL', label: '例行夜間點名' },
   { key: 'MAINTENANCE', label: '房間物品報修' },
-  { key: 'KEY_CARD_ISSUE', label: '鑰匙／房卡問題' },
+  { key: 'KEY_ISSUE', label: '鑰匙問題' },
+  { key: 'CARD_ISSUE', label: '房卡問題' },
   { key: 'OTHER', label: '其他特殊狀況' },
 ];
 
@@ -383,12 +385,24 @@ export default function ReportForm({
             </label>
           )}
 
-          {tab === 'KEY_CARD_ISSUE' && (
+          {tab === 'KEY_ISSUE' && (
             <label className="field">
               <span>狀況</span>
               <select value={item} onChange={(e) => setItem(e.target.value)}>
                 <option value="">請選擇</option>
-                {KEY_CARD_ITEMS.map((x) => (
+                {KEY_ITEMS.map((x) => (
+                  <option key={x} value={x}>{x}</option>
+                ))}
+              </select>
+            </label>
+          )}
+
+          {tab === 'CARD_ISSUE' && (
+            <label className="field">
+              <span>狀況</span>
+              <select value={item} onChange={(e) => setItem(e.target.value)}>
+                <option value="">請選擇</option>
+                {CARD_ITEMS.map((x) => (
                   <option key={x} value={x}>{x}</option>
                 ))}
               </select>
@@ -397,7 +411,7 @@ export default function ReportForm({
 
           <label className="field">
             <span>
-              {tab === 'MAINTENANCE' ? '損壞位置與狀況說明' : tab === 'KEY_CARD_ISSUE' ? '補充說明' : '狀況說明'}
+              {tab === 'MAINTENANCE' ? '損壞位置與狀況說明' : tab === 'KEY_ISSUE' || tab === 'CARD_ISSUE' ? '補充說明' : '狀況說明'}
             </span>
             <textarea
               value={description}
@@ -405,8 +419,10 @@ export default function ReportForm({
               placeholder={
                 tab === 'MAINTENANCE'
                   ? '例：靠窗床位電燈不亮，已經兩天了'
-                  : tab === 'KEY_CARD_ISSUE'
-                  ? '例：早上發現房卡消磁，刷不進房間'
+                  : tab === 'KEY_ISSUE'
+                  ? '例：早上出門發現鑰匙不見了'
+                  : tab === 'CARD_ISSUE'
+                  ? '例：房卡刷不進房間，可能消磁了'
                   : '請描述狀況'
               }
               rows={3}

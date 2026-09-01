@@ -57,7 +57,7 @@ export const issueReports = pgTable(
     studentId: integer('student_id')
       .notNull()
       .references(() => students.id, { onDelete: 'cascade' }),
-    reportType: text('report_type').notNull(), // MAINTENANCE | KEY_CARD_ISSUE | OTHER
+    reportType: text('report_type').notNull(), // MAINTENANCE | KEY_ISSUE | CARD_ISSUE | OTHER
     maintenanceItem: text('maintenance_item'), // 報修項目或鑰匙問題類型，例：冷氣、遺失
     issueDescription: text('issue_description'), // 詳細說明
     contactPhone: text('contact_phone'), // 聯絡電話 / Line ID

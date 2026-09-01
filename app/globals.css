@@ -142,7 +142,7 @@ textarea { resize: vertical; }
 .card.done .btn.ghost { margin-top: 16px; }
 
 /* 看板統計 */
-.stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 16px; }
+.stats { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-bottom: 16px; }
 .stat {
   background: #fff; border: 1px solid var(--line); border-radius: 12px;
   padding: 12px 6px; cursor: pointer; text-align: center;
