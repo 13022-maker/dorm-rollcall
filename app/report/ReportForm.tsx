@@ -32,15 +32,17 @@ const STATUS_STYLE: Record<string, { bg: string; fg: string }> = {
 
 const NONE = '__none__'; // 未分配房號
 
-// 回報類型分頁：ROLLCALL 是預設的例行夜間點名，其他三種寫進 issue_reports
-type ReportTab = 'ROLLCALL' | IssueType;
+// 回報類型只留兩個大分頁：例行點名 / 其他所有狀況（報修、鑰匙、房卡、其他）。
+// 「其他狀況」底下還是要知道細分類（後台圖示、統計都靠這個），所以選了這個分頁後
+// 再用第二層按鈕選細項，對應到 issue_reports 的 reportType。
+type ReportTab = 'ROLLCALL' | 'ISSUE';
 const TABS: { key: ReportTab; label: string }[] = [
-  { key: 'ROLLCALL', label: '例行夜間點名' },
-  { key: 'MAINTENANCE', label: '房間物品報修' },
-  { key: 'KEY_ISSUE', label: '鑰匙問題' },
-  { key: 'CARD_ISSUE', label: '房卡問題' },
-  { key: 'OTHER', label: '其他特殊狀況' },
+  { key: 'ROLLCALL', label: '夜間點名' },
+  { key: 'ISSUE', label: '卡片鑰匙等' },
 ];
+
+// 「卡片鑰匙等」底下的細項（涵蓋原本的房間物品報修／鑰匙／房卡／其他特殊狀況）
+const ISSUE_TYPES: IssueType[] = ['MAINTENANCE', 'KEY_ISSUE', 'CARD_ISSUE', 'OTHER'];
 
 function floorLabel(f: number | null) {
   if (f == null) return '未分配';
@@ -57,13 +59,14 @@ export default function ReportForm({
   region: string;
 }) {
   const [tab, setTab] = useState<ReportTab>('ROLLCALL');
+  const [issueType, setIssueType] = useState<IssueType | ''>(''); // 「卡片鑰匙等」底下選的細項
   const [building, setBuilding] = useState('');
   const [room, setRoom] = useState('');
   const [sid, setSid] = useState<number | ''>('');
   const [explanation, setExplanation] = useState('');
   const [result, setResult] = useState<ReportResult | null>(null);
 
-  // 報修／鑰匙房卡問題／其他 共用欄位
+  // 報修／鑰匙／房卡／其他 共用欄位
   const [item, setItem] = useState('');
   const [description, setDescription] = useState('');
   const [contactPhone, setContactPhone] = useState('');
@@ -164,6 +167,15 @@ export default function ReportForm({
     setResult(null);
     setIssueResult(null);
     setIssueErr('');
+    setIssueType('');
+    setItem('');
+    setDescription('');
+    setContactPhone('');
+  }
+  function chooseIssueType(t: IssueType) {
+    setIssueType(t);
+    setIssueResult(null);
+    setIssueErr('');
     setItem('');
     setDescription('');
     setContactPhone('');
@@ -180,7 +192,7 @@ export default function ReportForm({
   }
 
   function sendIssue() {
-    if (!me) return;
+    if (!me || !issueType) return;
     if (!description.trim()) {
       setIssueErr('請填寫狀況說明');
       return;
@@ -190,7 +202,7 @@ export default function ReportForm({
       const r = await submitIssueReport({
         studentId: me.id,
         region,
-        reportType: tab as IssueType,
+        reportType: issueType,
         maintenanceItem: item || null,
         issueDescription: description,
         contactPhone: contactPhone || null,
@@ -224,8 +236,8 @@ export default function ReportForm({
     );
   }
 
-  // 報修／鑰匙房卡／其他：送出成功畫面
-  if (tab !== 'ROLLCALL' && issueResult?.ok) {
+  // 卡片鑰匙等：送出成功畫面
+  if (tab === 'ISSUE' && issueResult?.ok) {
     return (
       <div className="card done" style={{ background: '#dbeafe', color: '#1e3a8a' }}>
         <div className="tick">✓</div>
@@ -260,6 +272,24 @@ export default function ReportForm({
           ))}
         </div>
       </div>
+
+      {/* 0b. 卡片鑰匙等：第二層選細項（房間物品報修／鑰匙／房卡／其他特殊狀況） */}
+      {tab === 'ISSUE' && (
+        <div className="field">
+          <span>細項</span>
+          <div className="tabs sub">
+            {ISSUE_TYPES.map((t) => (
+              <button
+                key={t}
+                className={`tab-btn sm${issueType === t ? ' on' : ''}`}
+                onClick={() => chooseIssueType(t)}
+              >
+                {ISSUE_TYPE_LABEL[t]}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* 1. 棟別 */}
       <div className="field">
@@ -370,10 +400,14 @@ export default function ReportForm({
         </>
       )}
 
-      {/* 報修／鑰匙房卡問題／其他：專屬欄位 */}
-      {tab !== 'ROLLCALL' && me && (
+      {/* 卡片鑰匙等：選了細項、也選好身分才顯示欄位 */}
+      {tab === 'ISSUE' && !issueType && (
+        <p className="sub">請先選擇上方「細項」，再選擇你的姓名並填寫內容。</p>
+      )}
+
+      {tab === 'ISSUE' && issueType && me && (
         <>
-          {tab === 'MAINTENANCE' && (
+          {issueType === 'MAINTENANCE' && (
             <label className="field">
               <span>報修項目</span>
               <select value={item} onChange={(e) => setItem(e.target.value)}>
@@ -385,7 +419,7 @@ export default function ReportForm({
             </label>
           )}
 
-          {tab === 'KEY_ISSUE' && (
+          {issueType === 'KEY_ISSUE' && (
             <label className="field">
               <span>狀況</span>
               <select value={item} onChange={(e) => setItem(e.target.value)}>
@@ -397,7 +431,7 @@ export default function ReportForm({
             </label>
           )}
 
-          {tab === 'CARD_ISSUE' && (
+          {issueType === 'CARD_ISSUE' && (
             <label className="field">
               <span>狀況</span>
               <select value={item} onChange={(e) => setItem(e.target.value)}>
@@ -411,17 +445,17 @@ export default function ReportForm({
 
           <label className="field">
             <span>
-              {tab === 'MAINTENANCE' ? '損壞位置與狀況說明' : tab === 'KEY_ISSUE' || tab === 'CARD_ISSUE' ? '補充說明' : '狀況說明'}
+              {issueType === 'MAINTENANCE' ? '損壞位置與狀況說明' : issueType === 'KEY_ISSUE' || issueType === 'CARD_ISSUE' ? '補充說明' : '狀況說明'}
             </span>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder={
-                tab === 'MAINTENANCE'
+                issueType === 'MAINTENANCE'
                   ? '例：靠窗床位電燈不亮，已經兩天了'
-                  : tab === 'KEY_ISSUE'
+                  : issueType === 'KEY_ISSUE'
                   ? '例：早上出門發現鑰匙不見了'
-                  : tab === 'CARD_ISSUE'
+                  : issueType === 'CARD_ISSUE'
                   ? '例：房卡刷不進房間，可能消磁了'
                   : '請描述狀況'
               }
@@ -442,12 +476,12 @@ export default function ReportForm({
           {issueResult && !issueResult.ok && <p className="err">{issueResult.message}</p>}
 
           <button className="btn primary" disabled={!me || pending} onClick={sendIssue}>
-            {pending ? '送出中…' : `送出${ISSUE_TYPE_LABEL[tab as IssueType]}`}
+            {pending ? '送出中…' : `送出${ISSUE_TYPE_LABEL[issueType]}`}
           </button>
         </>
       )}
 
-      {tab !== 'ROLLCALL' && !me && (
+      {tab === 'ISSUE' && issueType && !me && (
         <p className="sub">請先選擇你的姓名，再填寫詳細內容。</p>
       )}
     </div>

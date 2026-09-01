@@ -67,6 +67,10 @@ textarea { resize: vertical; }
   font-family: inherit;
 }
 .tab-btn.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+/* 「卡片鑰匙等」底下的第二層細項，縮小一號跟主分頁區隔開 */
+.tabs.sub { margin-top: 4px; }
+.tab-btn.sm { padding: 7px 12px; font-size: 13px; }
+.tab-btn.sm.on { background: var(--brand); border-color: var(--brand); }
 
 /* 姓名點選按鈕 */
 .names { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
